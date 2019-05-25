@@ -19,6 +19,44 @@ namespace CaloriesCalculator
 
         private void btnCalculate_Click(object sender, EventArgs e)
         {
+            /*
+             * v1.1需要加入用户输入数据验证，防止出错退出
+             * 通过tryparse的结果来判断
+             */
+             //验证身高的两个输入框
+             double result;
+
+             if (!double.TryParse(txtFeet.Text, out result))
+             {
+                 MessageBox.Show("必须输入数字。");
+                 txtFeet.Select();
+                 return;
+             }
+            if (!double.TryParse(txtInches.Text, out result))
+            {
+                MessageBox.Show("必须输入数字。");
+                txtInches.Select();
+                return;
+            }
+            //验证重量
+            if (!double.TryParse(txtWeight.Text, out result))
+            {
+                MessageBox.Show("必须输入数字。");
+                txtWeight.Select();
+                return;
+            }
+
+            //验证年龄
+            if (!double.TryParse(txtAge.Text, out result))
+            {
+                MessageBox.Show("必须输入数字。");
+                txtAge.Select();
+                return;
+            }
+
+            /*
+             * v1.0计算逻辑
+             */
             if (rbtnMale.Checked)
             {
                 txtCalories.Text = (66
