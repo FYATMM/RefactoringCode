@@ -52,7 +52,22 @@
             this.txtDistance = new System.Windows.Forms.TextBox();
             this.lblIdealWeight = new System.Windows.Forms.Label();
             this.txtIdealWeight = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtLastName = new System.Windows.Forms.TextBox();
+            this.txtFirstName = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtSSNThirdPart = new System.Windows.Forms.TextBox();
+            this.txtSSNSecondPart = new System.Windows.Forms.TextBox();
+            this.txtSSNFirstPart = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnView = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label9
@@ -148,7 +163,7 @@
             this.groupBox1.Controls.Add(this.rbtnMale);
             this.groupBox1.Controls.Add(this.txtFeet);
             this.groupBox1.Controls.Add(this.txtWeight);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 123);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(329, 207);
             this.groupBox1.TabIndex = 4;
@@ -286,16 +301,146 @@
             this.txtIdealWeight.Size = new System.Drawing.Size(120, 21);
             this.txtIdealWeight.TabIndex = 21;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtLastName);
+            this.groupBox2.Controls.Add(this.txtFirstName);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.txtSSNThirdPart);
+            this.groupBox2.Controls.Add(this.txtSSNSecondPart);
+            this.groupBox2.Controls.Add(this.txtSSNFirstPart);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Location = new System.Drawing.Point(12, 9);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(327, 108);
+            this.groupBox2.TabIndex = 27;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Patient personal data";
+            // 
+            // txtLastName
+            // 
+            this.txtLastName.Location = new System.Drawing.Point(180, 77);
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(120, 21);
+            this.txtLastName.TabIndex = 7;
+            this.txtLastName.Text = "Doe";
+            // 
+            // txtFirstName
+            // 
+            this.txtFirstName.Location = new System.Drawing.Point(8, 77);
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(120, 21);
+            this.txtFirstName.TabIndex = 6;
+            this.txtFirstName.Text = "John";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(177, 62);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(59, 12);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Last Name";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 62);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(65, 12);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "First Name";
+            // 
+            // txtSSNThirdPart
+            // 
+            this.txtSSNThirdPart.Location = new System.Drawing.Point(73, 30);
+            this.txtSSNThirdPart.MaxLength = 4;
+            this.txtSSNThirdPart.Name = "txtSSNThirdPart";
+            this.txtSSNThirdPart.Size = new System.Drawing.Size(39, 21);
+            this.txtSSNThirdPart.TabIndex = 3;
+            this.txtSSNThirdPart.Text = "1234";
+            // 
+            // txtSSNSecondPart
+            // 
+            this.txtSSNSecondPart.Location = new System.Drawing.Point(43, 30);
+            this.txtSSNSecondPart.MaxLength = 2;
+            this.txtSSNSecondPart.Name = "txtSSNSecondPart";
+            this.txtSSNSecondPart.Size = new System.Drawing.Size(24, 21);
+            this.txtSSNSecondPart.TabIndex = 2;
+            this.txtSSNSecondPart.Text = "12";
+            // 
+            // txtSSNFirstPart
+            // 
+            this.txtSSNFirstPart.Location = new System.Drawing.Point(6, 30);
+            this.txtSSNFirstPart.MaxLength = 3;
+            this.txtSSNFirstPart.Name = "txtSSNFirstPart";
+            this.txtSSNFirstPart.Size = new System.Drawing.Size(31, 21);
+            this.txtSSNFirstPart.TabIndex = 1;
+            this.txtSSNFirstPart.Text = "123";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(8, 15);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(23, 12);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "SSN";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnView);
+            this.groupBox3.Controls.Add(this.btnSave);
+            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Location = new System.Drawing.Point(13, 360);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(328, 75);
+            this.groupBox3.TabIndex = 28;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Operations";
+            // 
+            // btnView
+            // 
+            this.btnView.Location = new System.Drawing.Point(230, 31);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(91, 21);
+            this.btnView.TabIndex = 14;
+            this.btnView.Text = "View";
+            this.btnView.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(118, 31);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(91, 21);
+            this.btnSave.TabIndex = 13;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 31);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 21);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Calculate";
+            // 
             // CaloriesCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 236);
+            this.ClientSize = new System.Drawing.Size(368, 446);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "CaloriesCalculator";
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -326,6 +471,19 @@
         private System.Windows.Forms.TextBox txtDistance;
         private System.Windows.Forms.Label lblIdealWeight;
         private System.Windows.Forms.TextBox txtIdealWeight;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtLastName;
+        private System.Windows.Forms.TextBox txtFirstName;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtSSNThirdPart;
+        private System.Windows.Forms.TextBox txtSSNSecondPart;
+        private System.Windows.Forms.TextBox txtSSNFirstPart;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.Button btnSave;
+        internal System.Windows.Forms.Button button1;
     }
 }
 
