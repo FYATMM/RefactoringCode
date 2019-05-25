@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactoringCode", "RefactoringCode\RefactoringCode.csproj", "{9ADC738D-24E0-4743-9907-B48FEDE34518}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumeLongParameter", "ResumeLongParameter\ResumeLongParameter.csproj", "{E90CE97A-5043-43BD-A307-0CA51EBAC9BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "代码重构 Csharp ASPNET版", "代码重构 Csharp ASPNET版", "{F11E04CC-E140-4663-868F-FC5F9D22E90A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1初体验", "1初体验", "{E32B1B89-CB93-4E3E-8B69-9397AF8985A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloriesCalculator", "CaloriesCalculator\CaloriesCalculator.csproj", "{7BE68F7D-9B66-4BE9-B9EC-AF3F34231A63}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9ADC738D-24E0-4743-9907-B48FEDE34518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ADC738D-24E0-4743-9907-B48FEDE34518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ADC738D-24E0-4743-9907-B48FEDE34518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ADC738D-24E0-4743-9907-B48FEDE34518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E90CE97A-5043-43BD-A307-0CA51EBAC9BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E90CE97A-5043-43BD-A307-0CA51EBAC9BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E90CE97A-5043-43BD-A307-0CA51EBAC9BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E90CE97A-5043-43BD-A307-0CA51EBAC9BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BE68F7D-9B66-4BE9-B9EC-AF3F34231A63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BE68F7D-9B66-4BE9-B9EC-AF3F34231A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BE68F7D-9B66-4BE9-B9EC-AF3F34231A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BE68F7D-9B66-4BE9-B9EC-AF3F34231A63}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E32B1B89-CB93-4E3E-8B69-9397AF8985A5} = {F11E04CC-E140-4663-868F-FC5F9D22E90A}
+		{7BE68F7D-9B66-4BE9-B9EC-AF3F34231A63} = {E32B1B89-CB93-4E3E-8B69-9397AF8985A5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5845399D-ADED-4C27-8D45-8E7AA6F07E19}
+	EndGlobalSection
+EndGlobal
