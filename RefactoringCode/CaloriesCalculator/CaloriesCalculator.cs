@@ -19,40 +19,81 @@ namespace CaloriesCalculator
 
         private void btnCalculate_Click(object sender, EventArgs e)
         {
-            /*
-             *v1.2 需求开始增加
-             *增加一个计算理想体重的功能，有一个公式计算及显示，还需要身高》5
-             * 并且需要在每次计算前清楚旧的结果，即使输入错误，也要先清楚旧结果
-             */
-            txtDistance.Text = "";
-            txtIdealWeight.Text = "";
-            txtCalories.Text = "";
+            ClearResults();
 
+            if (UserInputInvalid()) return;
+
+            if (rbtnMale.Checked)
+            {
+                txtCalories.Text = DailyCaloriesRecommendedMale(Convert.ToDouble(txtWeight.Text), ((Convert.ToDouble(txtFeet.Text) * 12)
+                                                                                                   + Convert.ToDouble(txtInches.Text)), Convert.ToDouble(txtAge.Text)).ToString();
+                txtIdealWeight.Text = IdealBodyWeightMale((((Convert.ToDouble(txtFeet.Text) - 5) * 12)
+                                                           + Convert.ToDouble(txtInches.Text))).ToString();
+            }
+            else
+            {
+                txtCalories.Text = DailyCaloriesRecommendedFemale(Convert.ToDouble(txtWeight.Text), ((Convert.ToDouble(txtFeet.Text) * 12)
+                                                                                                     + Convert.ToDouble(txtInches.Text)), Convert.ToDouble(txtAge.Text)).ToString();
+                txtIdealWeight.Text = idealBodyWeightFemale((((Convert.ToDouble(txtFeet.Text) - 5) * 12)
+                                                             + Convert.ToDouble(txtInches.Text))).ToString();
+            }
+            txtDistance.Text = DistanceFromIdealWeight(Convert.ToDouble(txtWeight.Text), Convert.ToDouble(txtIdealWeight.Text)).ToString();
+        }
+
+        private double idealBodyWeightFemale(double heightInInches)
+        {
+            return (45.5+ (2.3 * heightInInches))* 2.2046;
+        }
+
+        private double DailyCaloriesRecommendedFemale(double weightInPounds, double heightInInches, double age)
+        {
+            return 655+ (4.3 * weightInPounds)+ (4.7 * heightInInches)- (4.7 * age);
+        }
+
+        private double IdealBodyWeightMale(double heightInInches)
+        {
+            return (50+ (2.3 * heightInInches))* 2.2046;
+        }
+
+        private double DailyCaloriesRecommendedMale(double weightInPounds, double heightInInches, double age)
+        {
+            return (66+ (6.3 * weightInPounds)+ (12.9 * heightInInches)- (6.8 * age));
+        }
+
+        private double DistanceFromIdealWeight(double actualWeightInPounds, double idealWeightInPounds)
+        {
+            return actualWeightInPounds - idealWeightInPounds;
+        }
+
+        private bool UserInputInvalid()
+        {
             /*
              * v1.1需要加入用户输入数据验证，防止出错退出
              * 通过tryparse的结果来判断
              */
-             //验证身高的两个输入框
-             double result;
+            //验证身高的两个输入框
+            double result;
 
-             if (!double.TryParse(txtFeet.Text, out result))
-             {
-                 MessageBox.Show("必须输入数字。");
-                 txtFeet.Select();
-                 return;
-             }
+            if (!double.TryParse(txtFeet.Text, out result))
+            {
+                MessageBox.Show("必须输入数字。");
+                txtFeet.Select();
+                return true;
+            }
+
             if (!double.TryParse(txtInches.Text, out result))
             {
                 MessageBox.Show("必须输入数字。");
                 txtInches.Select();
-                return;
+                return true;
             }
+
             //验证重量
             if (!double.TryParse(txtWeight.Text, out result))
             {
                 MessageBox.Show("必须输入数字。");
                 txtWeight.Select();
-                return;
+                return true;
             }
 
             //验证年龄
@@ -60,7 +101,7 @@ namespace CaloriesCalculator
             {
                 MessageBox.Show("必须输入数字。");
                 txtAge.Select();
-                return;
+                return true;
             }
 
             /*
@@ -70,40 +111,22 @@ namespace CaloriesCalculator
             {
                 MessageBox.Show("身高必去大于等于5");
                 txtFeet.Select();
-                return;
+                return true;
             }
 
+            return false;
+        }
+
+        private void ClearResults()
+        {
             /*
-             * v1.0计算逻辑
+             *v1.2 需求开始增加
+             *增加一个计算理想体重的功能，有一个公式计算及显示，还需要身高》5
+             * 并且需要在每次计算前清楚旧的结果，即使输入错误，也要先清楚旧结果
              */
-            if (rbtnMale.Checked)
-            {
-                txtCalories.Text = (66
-                                    + (6.3 * Convert.ToDouble(txtWeight.Text))
-                                    + (12.9 * ((Convert.ToDouble(txtFeet.Text)*12)
-                                           +Convert.ToDouble(txtInches.Text)) )
-                                    -(6.8 * Convert.ToDouble(txtAge.Text))).ToString();
-                    //v1.2增加计算合理体重
-                    txtIdealWeight.Text = ((50
-                                            + (2.3 * (((Convert.ToDouble(txtFeet.Text) - 5) * 12)
-                                                      + Convert.ToDouble(txtInches.Text))))
-                                           * 2.2046).ToString();
-            }
-            else
-            {
-                txtCalories.Text = (655
-                                    + (4.3 * Convert.ToDouble(txtWeight.Text))
-                                    + (4.7 * ((Convert.ToDouble(txtFeet.Text) * 12)
-                                               + Convert.ToDouble(txtInches.Text)))
-                                    - (4.7 * Convert.ToDouble(txtAge.Text))).ToString();
-                //v1.2增加计算合理体重
-                txtIdealWeight.Text = ((45.5
-                                        + (2.3 * (((Convert.ToDouble(txtFeet.Text) - 5) * 12)
-                                                  + Convert.ToDouble(txtInches.Text))))
-                                       * 2.2046).ToString();
-            }
-            //v1.2 计算与理想体重的差值
-            txtDistance.Text = (Convert.ToDouble(txtWeight.Text) - Convert.ToDouble(txtIdealWeight.Text)).ToString();
+            txtDistance.Text = "";
+            txtIdealWeight.Text = "";
+            txtCalories.Text = "";
         }
     }
 }
