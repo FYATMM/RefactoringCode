@@ -48,10 +48,7 @@ namespace CaloriesCalculator
             txtDistance.Text = DistanceFromIdealWeight(Convert.ToDouble(txtWeight.Text), Convert.ToDouble(txtIdealWeight.Text)).ToString();
         }
 
-        private double DistanceFromIdealWeight(double actualWeightInPounds, double idealWeightInPounds)
-        {
-            return actualWeightInPounds - idealWeightInPounds;
-        }
+
 
         private bool UserInputInvalid()
         {
