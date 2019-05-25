@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1初体验", "1初体验", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloriesCalculator", "CaloriesCalculator\CaloriesCalculator.csproj", "{7BE68F7D-9B66-4BE9-B9EC-AF3F34231A63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{AD5E60E5-410A-4EA4-AD33-23476A528DC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{7BE68F7D-9B66-4BE9-B9EC-AF3F34231A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BE68F7D-9B66-4BE9-B9EC-AF3F34231A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BE68F7D-9B66-4BE9-B9EC-AF3F34231A63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD5E60E5-410A-4EA4-AD33-23476A528DC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD5E60E5-410A-4EA4-AD33-23476A528DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD5E60E5-410A-4EA4-AD33-23476A528DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD5E60E5-410A-4EA4-AD33-23476A528DC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E32B1B89-CB93-4E3E-8B69-9397AF8985A5} = {F11E04CC-E140-4663-868F-FC5F9D22E90A}
 		{7BE68F7D-9B66-4BE9-B9EC-AF3F34231A63} = {E32B1B89-CB93-4E3E-8B69-9397AF8985A5}
+		{AD5E60E5-410A-4EA4-AD33-23476A528DC5} = {E32B1B89-CB93-4E3E-8B69-9397AF8985A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5845399D-ADED-4C27-8D45-8E7AA6F07E19}
