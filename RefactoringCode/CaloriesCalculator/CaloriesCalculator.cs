@@ -28,18 +28,23 @@ namespace CaloriesCalculator
 
             if (UserInputInvalid()) return;
 
-            Patient = new Patient
-            {
-                HeightInInches = Convert.ToDouble(txtFeet.Text) * 12 + Convert.ToDouble(txtInches.Text),
-                WeightInPounds = Convert.ToDouble(txtWeight.Text),
-                Age = Convert.ToDouble(txtAge.Text),
-                Gender = rbtnMale.Checked ? Gender.Male : Gender.Female
-            };//使用时再初始化，初始化时赋值
+            //Patient = new Patient
+            //{
+            //    HeightInInches = Convert.ToDouble(txtFeet.Text) * 12 + Convert.ToDouble(txtInches.Text),
+            //    WeightInPounds = Convert.ToDouble(txtWeight.Text),
+            //    Age = Convert.ToDouble(txtAge.Text),
+            //    Gender = rbtnMale.Checked ? Gender.Male : Gender.Female
+            //};//使用时再初始化，初始化时赋值
 
+            if (rbtnFemale.Checked) Patient = new FemalePaient();
+            if (rbtnMale.Checked) Patient = new MalePatient();
+
+            Patient.HeightInInches = Convert.ToDouble(txtFeet.Text) * 12 + Convert.ToDouble(txtInches.Text);
+            Patient.WeightInPounds = Convert.ToDouble(txtWeight.Text);
+            Patient.Age = Convert.ToDouble(txtAge.Text);
+ 
             txtCalories.Text = Patient.DailyCaloriesRecommended().ToString();
             txtIdealWeight.Text = Patient.IdealBodyWeight().ToString();
-
-            //txtDistance.Text = DistanceFromIdealWeight(Convert.ToDouble(txtWeight.Text), Convert.ToDouble(txtIdealWeight.Text)).ToString();
             txtDistance.Text = Patient.DistanceFromIdealWeight().ToString();
         }
 

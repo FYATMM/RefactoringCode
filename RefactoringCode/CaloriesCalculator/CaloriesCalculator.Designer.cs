@@ -37,6 +37,12 @@
             this.Label6 = new System.Windows.Forms.Label();
             this.txtWeight = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lblDistance = new System.Windows.Forms.Label();
+            this.txtDistance = new System.Windows.Forms.TextBox();
+            this.lblIdealWeight = new System.Windows.Forms.Label();
+            this.txtIdealWeight = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtCalories = new System.Windows.Forms.TextBox();
@@ -46,12 +52,6 @@
             this.rbtnFemale = new System.Windows.Forms.RadioButton();
             this.rbtnMale = new System.Windows.Forms.RadioButton();
             this.txtFeet = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lblDistance = new System.Windows.Forms.Label();
-            this.txtDistance = new System.Windows.Forms.TextBox();
-            this.lblIdealWeight = new System.Windows.Forms.Label();
-            this.txtIdealWeight = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtFirstName = new System.Windows.Forms.TextBox();
@@ -64,7 +64,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnView = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -89,9 +88,9 @@
             // 
             // btnCalculate
             // 
-            this.btnCalculate.Location = new System.Drawing.Point(182, 15);
+            this.btnCalculate.Location = new System.Drawing.Point(9, 31);
             this.btnCalculate.Name = "btnCalculate";
-            this.btnCalculate.Size = new System.Drawing.Size(119, 21);
+            this.btnCalculate.Size = new System.Drawing.Size(86, 21);
             this.btnCalculate.TabIndex = 12;
             this.btnCalculate.Text = "Calculate";
             this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
@@ -148,7 +147,6 @@
             this.groupBox1.Controls.Add(this.txtIdealWeight);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.txtInches);
-            this.groupBox1.Controls.Add(this.btnCalculate);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.Label8);
             this.groupBox1.Controls.Add(this.txtAge);
@@ -168,6 +166,60 @@
             this.groupBox1.Size = new System.Drawing.Size(329, 207);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(300, 75);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(23, 15);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "lbs";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(300, 120);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(23, 15);
+            this.label10.TabIndex = 23;
+            this.label10.Text = "lbs";
+            // 
+            // lblDistance
+            // 
+            this.lblDistance.AutoSize = true;
+            this.lblDistance.Location = new System.Drawing.Point(180, 51);
+            this.lblDistance.Name = "lblDistance";
+            this.lblDistance.Size = new System.Drawing.Size(155, 12);
+            this.lblDistance.TabIndex = 25;
+            this.lblDistance.Text = "Distance to Ideal Weight:";
+            // 
+            // txtDistance
+            // 
+            this.txtDistance.Location = new System.Drawing.Point(179, 70);
+            this.txtDistance.Name = "txtDistance";
+            this.txtDistance.ReadOnly = true;
+            this.txtDistance.Size = new System.Drawing.Size(120, 21);
+            this.txtDistance.TabIndex = 24;
+            // 
+            // lblIdealWeight
+            // 
+            this.lblIdealWeight.AutoSize = true;
+            this.lblIdealWeight.Location = new System.Drawing.Point(181, 97);
+            this.lblIdealWeight.Name = "lblIdealWeight";
+            this.lblIdealWeight.Size = new System.Drawing.Size(83, 12);
+            this.lblIdealWeight.TabIndex = 22;
+            this.lblIdealWeight.Text = "Ideal Weight:";
+            // 
+            // txtIdealWeight
+            // 
+            this.txtIdealWeight.Location = new System.Drawing.Point(179, 115);
+            this.txtIdealWeight.Name = "txtIdealWeight";
+            this.txtIdealWeight.ReadOnly = true;
+            this.txtIdealWeight.Size = new System.Drawing.Size(120, 21);
+            this.txtIdealWeight.TabIndex = 21;
             // 
             // label5
             // 
@@ -246,60 +298,6 @@
             this.txtFeet.Size = new System.Drawing.Size(44, 21);
             this.txtFeet.TabIndex = 7;
             this.txtFeet.Text = "5";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(300, 75);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(23, 15);
-            this.label11.TabIndex = 26;
-            this.label11.Text = "lbs";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(300, 120);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(23, 15);
-            this.label10.TabIndex = 23;
-            this.label10.Text = "lbs";
-            // 
-            // lblDistance
-            // 
-            this.lblDistance.AutoSize = true;
-            this.lblDistance.Location = new System.Drawing.Point(180, 51);
-            this.lblDistance.Name = "lblDistance";
-            this.lblDistance.Size = new System.Drawing.Size(155, 12);
-            this.lblDistance.TabIndex = 25;
-            this.lblDistance.Text = "Distance to Ideal Weight:";
-            // 
-            // txtDistance
-            // 
-            this.txtDistance.Location = new System.Drawing.Point(179, 70);
-            this.txtDistance.Name = "txtDistance";
-            this.txtDistance.ReadOnly = true;
-            this.txtDistance.Size = new System.Drawing.Size(120, 21);
-            this.txtDistance.TabIndex = 24;
-            // 
-            // lblIdealWeight
-            // 
-            this.lblIdealWeight.AutoSize = true;
-            this.lblIdealWeight.Location = new System.Drawing.Point(181, 97);
-            this.lblIdealWeight.Name = "lblIdealWeight";
-            this.lblIdealWeight.Size = new System.Drawing.Size(83, 12);
-            this.lblIdealWeight.TabIndex = 22;
-            this.lblIdealWeight.Text = "Ideal Weight:";
-            // 
-            // txtIdealWeight
-            // 
-            this.txtIdealWeight.Location = new System.Drawing.Point(179, 115);
-            this.txtIdealWeight.Name = "txtIdealWeight";
-            this.txtIdealWeight.ReadOnly = true;
-            this.txtIdealWeight.Size = new System.Drawing.Size(120, 21);
-            this.txtIdealWeight.TabIndex = 21;
             // 
             // groupBox2
             // 
@@ -392,7 +390,7 @@
             // 
             this.groupBox3.Controls.Add(this.btnView);
             this.groupBox3.Controls.Add(this.btnSave);
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.btnCalculate);
             this.groupBox3.Location = new System.Drawing.Point(13, 360);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(328, 75);
@@ -417,14 +415,6 @@
             this.btnSave.TabIndex = 13;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(6, 31);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 21);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Calculate";
             // 
             // CaloriesCalculator
             // 
@@ -483,7 +473,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Button btnSave;
-        internal System.Windows.Forms.Button button1;
     }
 }
 
