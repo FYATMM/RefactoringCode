@@ -153,12 +153,10 @@ namespace CaloriesCalculator
            //确保在保存之前完成了计算，通过调用计算按键事件，即保存前先计算，防止忘点
            btnCalculate_Click(null,null);
            bool fileCreated = true;
-           XmlDocument document = new XmlDocument();
+           
            try
            {
-               //获取当前执行程序的文件夹，并替换路径为xml文件
-                document.Load(Assembly.GetExecutingAssembly().Location
-                    .Replace("CaloriesCalculator.exe", "PatientHistory.xml"));
+               LoadHistoryFile();
            }
            catch (FileNotFoundException fileNotFoundException)
            {
@@ -169,52 +167,16 @@ namespace CaloriesCalculator
 
            if (!fileCreated)
            {
-               document.LoadXml(
-                   "<PatientHistory>" + 
-                        @"<patient ssn = \" + Patient.SSN + @"\" +
-                        @"<firstName=\" + Patient.FirstName + @"\" +
-                        @"<lastName=\"  + Patient.LastName + @"\" + ">" +
-                            @"<measurement date=\" + DateTime.Now + @"\" + ">" +
-                                "<height>" + Patient.HeightInInches + "</height>" + 
-                                "<weight>" + Patient.WeightInPounds + "</weight>" +
-                                "<age>" + Patient.Age + "</age>" + 
-                                "<dailyCaloriesRecommended>" + Patient.DailyCaloriesRecommended() + "</dailyCaloriesRecommended>" + 
-                                "<idealBodyWeight>" + Patient.IdealBodyWeight() + "</idealBodyWeight>" + 
-                                "<distanceFromIdealWeight>" + Patient.DistanceFromIdealWeight() + "</distanceFromIdealWeight>" +
-                            @"</measurement>" +
-                        @"</patient>" +
-                   "</PatientHistory>"
-                   );
+               var document = CreatePatientHistoryXmlFirstTime();
            }
            else
            {
-               //搜索存在的patient节点
-               XmlNode patientNode = null;
-               foreach (XmlNode node in document.FirstChild.ChildNodes)
-               {
-                   foreach (XmlAttribute attribute in node.Attributes)
-                   {
-                       //用SSN作唯一标识
-                       if ((attribute.Name == "ssn") & (attribute.Value == Patient.SSN))
-                       {
-                           patientNode = node;
-                       }
-                   }
-               }
+               var patientNode = FindPatientNode(document);
 
                if (patientNode == null)
                {
                    //如果没有，克隆任意病人节点用来给新的病人存储信息
-                   XmlNode thisPatient = document.DocumentElement.FirstChild.CloneNode(false);
-                   thisPatient.Attributes["ssn "].Value = Patient.SSN;
-                   thisPatient.Attributes["firstName"].Value = Patient.FirstName;
-                   thisPatient.Attributes["lastName"].Value = Patient.LastName;
-
-                   XmlNode measurement = document.DocumentElement.FirstChild["measurement"].CloneNode(true);
-                   SetMeasurementValues(measurement);
-
-                    thisPatient.AppendChild(measurement);
-                   document.FirstChild.AppendChild(thisPatient);
+                   AddNewPatient(document);
                }
                else
                {
@@ -227,6 +189,69 @@ namespace CaloriesCalculator
                //保存xml
                document.Save(Assembly.GetExecutingAssembly().Location.Replace("CaloriesCalculatior.exe ","PatientsHistory.xml"));
            }
+        }
+
+        private void AddNewPatient(XmlDocument document)
+        {
+            XmlNode thisPatient = document.DocumentElement.FirstChild.CloneNode(false);
+            thisPatient.Attributes["ssn "].Value = Patient.SSN;
+            thisPatient.Attributes["firstName"].Value = Patient.FirstName;
+            thisPatient.Attributes["lastName"].Value = Patient.LastName;
+
+            XmlNode measurement = document.DocumentElement.FirstChild["measurement"].CloneNode(true);
+            SetMeasurementValues(measurement);
+
+            thisPatient.AppendChild(measurement);
+            document.FirstChild.AppendChild(thisPatient);
+        }
+
+        //搜索存在的patient节点
+        private XmlNode FindPatientNode(XmlNode document)
+        {
+            XmlNode patientNode = null;
+            foreach (XmlNode node in document.FirstChild.ChildNodes)
+            {
+                foreach (XmlAttribute attribute in node.Attributes)
+                {
+                    //用SSN作唯一标识
+                    if ((attribute.Name == "ssn") & (attribute.Value == Patient.SSN))
+                    {
+                        patientNode = node;
+                    }
+                }
+            }
+
+            return patientNode;
+        }
+
+        private XmlDocument CreatePatientHistoryXmlFirstTime()
+        {
+            XmlDocument document = new XmlDocument();
+            document.LoadXml(
+                "<PatientHistory>" +
+                @"<patient ssn = \" + Patient.SSN + @"\" +
+                @"<firstName=\" + Patient.FirstName + @"\" +
+                @"<lastName=\" + Patient.LastName + @"\" + ">" +
+                @"<measurement date=\" + DateTime.Now + @"\" + ">" +
+                "<height>" + Patient.HeightInInches + "</height>" +
+                "<weight>" + Patient.WeightInPounds + "</weight>" +
+                "<age>" + Patient.Age + "</age>" +
+                "<dailyCaloriesRecommended>" + Patient.DailyCaloriesRecommended() + "</dailyCaloriesRecommended>" +
+                "<idealBodyWeight>" + Patient.IdealBodyWeight() + "</idealBodyWeight>" +
+                "<distanceFromIdealWeight>" + Patient.DistanceFromIdealWeight() + "</distanceFromIdealWeight>" +
+                @"</measurement>" +
+                @"</patient>" +
+                "</PatientHistory>"
+            );
+            return document;
+        }
+
+        private static void LoadHistoryFile()
+        {
+            XmlDocument document = new XmlDocument();
+            //获取当前执行程序的文件夹，并替换路径为xml文件
+            document.Load(Assembly.GetExecutingAssembly().Location
+                .Replace("CaloriesCalculator.exe", "PatientHistory.xml"));
         }
 
         private void SetMeasurementValues(XmlNode measurement)
