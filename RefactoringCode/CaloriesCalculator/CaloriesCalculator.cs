@@ -157,7 +157,7 @@ namespace CaloriesCalculator
            PatientHistoryXmlStorage.Save(Patient);
         }
 
-
+        //调用系统程序，及要打开的文件路径
         private void btnView_Click_1(object sender, EventArgs e)
         {
             Process.Start("IExplore.exe",
