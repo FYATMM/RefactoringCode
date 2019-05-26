@@ -211,34 +211,33 @@ namespace CaloriesCalculator
                    thisPatient.Attributes["lastName"].Value = Patient.LastName;
 
                    XmlNode measurement = document.DocumentElement.FirstChild["measurement"].CloneNode(true);
-                   measurement.Attributes["date"].Value = DateTime.Now.ToString();
-                   measurement["height"].FirstChild.Value = Patient.HeightInInches.ToString();
-                   measurement["weight"].FirstChild.Value = Patient.WeightInPounds.ToString();
-                   measurement["age"].FirstChild.Value = Patient.Age.ToString();
-                   measurement["dailyCaloriesRecommended"].FirstChild.Value = Patient.DailyCaloriesRecommended().ToString();
-                   measurement["idealBodyWeight"].FirstChild.Value = Patient.IdealBodyWeight().ToString();
-                   measurement["distanceFromIdealWeight"].FirstChild.Value = Patient.DistanceFromIdealWeight().ToString();
+                   SetMeasurementValues(measurement);
 
-                   thisPatient.AppendChild(measurement);
+                    thisPatient.AppendChild(measurement);
                    document.FirstChild.AppendChild(thisPatient);
                }
                else
                {
                    //如果找到节点，克隆一个节点，再保存信息
                    XmlNode measurement = patientNode.FirstChild.CloneNode(true);
-                    measurement.Attributes["date"].Value = DateTime.Now.ToString();
-                    measurement["height"].FirstChild.Value = Patient.HeightInInches.ToString();
-                    measurement["weight"].FirstChild.Value = Patient.WeightInPounds.ToString();
-                    measurement["age"].FirstChild.Value = Patient.Age.ToString();
-                    measurement["dailyCaloriesRecommended"].FirstChild.Value = Patient.DailyCaloriesRecommended().ToString();
-                    measurement["idealBodyWeight"].FirstChild.Value = Patient.IdealBodyWeight().ToString();
-                    measurement["distanceFromIdealWeight"].FirstChild.Value = Patient.DistanceFromIdealWeight().ToString();
+                    SetMeasurementValues(measurement);
 
                     patientNode.AppendChild(measurement);
                }
                //保存xml
                document.Save(Assembly.GetExecutingAssembly().Location.Replace("CaloriesCalculatior.exe ","PatientsHistory.xml"));
            }
+        }
+
+        private void SetMeasurementValues(XmlNode measurement)
+        {
+            measurement.Attributes["date"].Value = DateTime.Now.ToString();
+            measurement["height"].FirstChild.Value = Patient.HeightInInches.ToString();
+            measurement["weight"].FirstChild.Value = Patient.WeightInPounds.ToString();
+            measurement["age"].FirstChild.Value = Patient.Age.ToString();
+            measurement["dailyCaloriesRecommended"].FirstChild.Value = Patient.DailyCaloriesRecommended().ToString();
+            measurement["idealBodyWeight"].FirstChild.Value = Patient.IdealBodyWeight().ToString();
+            measurement["distanceFromIdealWeight"].FirstChild.Value = Patient.DistanceFromIdealWeight().ToString();
         }
     }
 }
