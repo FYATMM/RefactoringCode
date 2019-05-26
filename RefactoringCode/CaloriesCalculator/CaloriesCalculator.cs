@@ -14,12 +14,11 @@ namespace CaloriesCalculator
 {
     public partial class CaloriesCalculator : Form
     {
-        private readonly Patient _patient;
+        public Patient Patient { get; set; }
 
         public CaloriesCalculator()
         {
             InitializeComponent();
-            _patient = new Patient();
         }
 
 
@@ -29,26 +28,19 @@ namespace CaloriesCalculator
 
             if (UserInputInvalid()) return;
 
-            if (rbtnMale.Checked)
+            Patient = new Patient
             {
-                txtCalories.Text = _patient.DailyCaloriesRecommended().ToString();
-                //txtCalories.Text = Patient.DailyCaloriesRecommendedMale(Convert.ToDouble(txtWeight.Text), ((Convert.ToDouble(txtFeet.Text) * 12)
-                //                                                                                   + Convert.ToDouble(txtInches.Text)), Convert.ToDouble(txtAge.Text)).ToString();
-                txtIdealWeight.Text = _patient.IdealBodyWeight().ToString();
-                //txtIdealWeight.Text = Patient.IdealBodyWeightMale((((Convert.ToDouble(txtFeet.Text) - 5) * 12)
-                //                                           + Convert.ToDouble(txtInches.Text))).ToString();
-            }
-            else
-            {
-                txtCalories.Text = _patient.DailyCaloriesRecommended().ToString();
-                //txtCalories.Text = Patient.DailyCaloriesRecommendedFemale(Convert.ToDouble(txtWeight.Text), ((Convert.ToDouble(txtFeet.Text) * 12)
-                //                                                                                     + Convert.ToDouble(txtInches.Text)), Convert.ToDouble(txtAge.Text)).ToString();
-                txtIdealWeight.Text = _patient.IdealBodyWeight().ToString();
-                //txtIdealWeight.Text = Patient.idealBodyWeightFemale((((Convert.ToDouble(txtFeet.Text) - 5) * 12)
-                //                                             + Convert.ToDouble(txtInches.Text))).ToString();
-            }
+                HeightInInches = Convert.ToDouble(txtFeet.Text) * 12 + Convert.ToDouble(txtInches.Text),
+                WeightInPounds = Convert.ToDouble(txtWeight.Text),
+                Age = Convert.ToDouble(txtAge.Text),
+                Gender = rbtnMale.Checked ? Gender.Male : Gender.Female
+            };//使用时再初始化，初始化时赋值
+
+            txtCalories.Text = Patient.DailyCaloriesRecommended().ToString();
+            txtIdealWeight.Text = Patient.IdealBodyWeight().ToString();
+
             //txtDistance.Text = DistanceFromIdealWeight(Convert.ToDouble(txtWeight.Text), Convert.ToDouble(txtIdealWeight.Text)).ToString();
-            txtDistance.Text = _patient.DistanceFromIdealWeight().ToString();
+            txtDistance.Text = Patient.DistanceFromIdealWeight().ToString();
         }
 
 
