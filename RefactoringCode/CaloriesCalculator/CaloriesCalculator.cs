@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -19,9 +20,12 @@ namespace CaloriesCalculator
     {
         public Patient Patient { get; set; }
 
+        public PatientHistoryXMLStorage PatientHistoryXmlStorage { get; private set; }
+
         public CaloriesCalculator()
         {
             InitializeComponent();
+            PatientHistoryXmlStorage = new PatientHistoryXMLStorage();
         }
 
 
@@ -50,8 +54,6 @@ namespace CaloriesCalculator
             txtIdealWeight.Text = Patient.IdealBodyWeight().ToString();
             txtDistance.Text = Patient.DistanceFromIdealWeight().ToString();
         }
-
-
 
         private bool UserInputInvalid()
         {
@@ -133,14 +135,14 @@ namespace CaloriesCalculator
 
             if (txtFirstName.Text.Trim().Length < 1)
             {
-                MessageBox.Show("You must enter patient's first name.  ");
+                MessageBox.Show("You must enter Patient's first name.  ");
                 txtFirstName.Select();
                 return false;
             }
 
             if (txtLastName.Text.Trim().Length < 1)
             {
-                MessageBox.Show("You must enter patient's last name.  ");
+                MessageBox.Show("You must enter Patient's last name.  ");
                 txtFirstName.Select();
                 return false;
             }
@@ -149,120 +151,17 @@ namespace CaloriesCalculator
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-           if(!ValidatePatientPersonalData()  |  !UserInputInvalid()) return;
+           if(!ValidatePatientPersonalData()  |  UserInputInvalid()) return;
            //确保在保存之前完成了计算，通过调用计算按键事件，即保存前先计算，防止忘点
            btnCalculate_Click(null,null);
-           bool fileCreated = true;
-           
-           try
-           {
-               LoadHistoryFile();
-           }
-           catch (FileNotFoundException fileNotFoundException)
-           {
-               //Console.WriteLine(fileNotFoundException);
-               //throw;
-               fileCreated = false;
-           }
-
-           if (!fileCreated)
-           {
-               var document = CreatePatientHistoryXmlFirstTime();
-           }
-           else
-           {
-               var patientNode = FindPatientNode(document);
-
-               if (patientNode == null)
-               {
-                   //如果没有，克隆任意病人节点用来给新的病人存储信息
-                   AddNewPatient(document);
-               }
-               else
-               {
-                   //如果找到节点，克隆一个节点，再保存信息
-                   XmlNode measurement = patientNode.FirstChild.CloneNode(true);
-                    SetMeasurementValues(measurement);
-
-                    patientNode.AppendChild(measurement);
-               }
-               //保存xml
-               document.Save(Assembly.GetExecutingAssembly().Location.Replace("CaloriesCalculatior.exe ","PatientsHistory.xml"));
-           }
+           PatientHistoryXmlStorage.Save(Patient);
         }
 
-        private void AddNewPatient(XmlDocument document)
+
+        private void btnView_Click_1(object sender, EventArgs e)
         {
-            XmlNode thisPatient = document.DocumentElement.FirstChild.CloneNode(false);
-            thisPatient.Attributes["ssn "].Value = Patient.SSN;
-            thisPatient.Attributes["firstName"].Value = Patient.FirstName;
-            thisPatient.Attributes["lastName"].Value = Patient.LastName;
-
-            XmlNode measurement = document.DocumentElement.FirstChild["measurement"].CloneNode(true);
-            SetMeasurementValues(measurement);
-
-            thisPatient.AppendChild(measurement);
-            document.FirstChild.AppendChild(thisPatient);
-        }
-
-        //搜索存在的patient节点
-        private XmlNode FindPatientNode(XmlNode document)
-        {
-            XmlNode patientNode = null;
-            foreach (XmlNode node in document.FirstChild.ChildNodes)
-            {
-                foreach (XmlAttribute attribute in node.Attributes)
-                {
-                    //用SSN作唯一标识
-                    if ((attribute.Name == "ssn") & (attribute.Value == Patient.SSN))
-                    {
-                        patientNode = node;
-                    }
-                }
-            }
-
-            return patientNode;
-        }
-
-        private XmlDocument CreatePatientHistoryXmlFirstTime()
-        {
-            XmlDocument document = new XmlDocument();
-            document.LoadXml(
-                "<PatientHistory>" +
-                @"<patient ssn = \" + Patient.SSN + @"\" +
-                @"<firstName=\" + Patient.FirstName + @"\" +
-                @"<lastName=\" + Patient.LastName + @"\" + ">" +
-                @"<measurement date=\" + DateTime.Now + @"\" + ">" +
-                "<height>" + Patient.HeightInInches + "</height>" +
-                "<weight>" + Patient.WeightInPounds + "</weight>" +
-                "<age>" + Patient.Age + "</age>" +
-                "<dailyCaloriesRecommended>" + Patient.DailyCaloriesRecommended() + "</dailyCaloriesRecommended>" +
-                "<idealBodyWeight>" + Patient.IdealBodyWeight() + "</idealBodyWeight>" +
-                "<distanceFromIdealWeight>" + Patient.DistanceFromIdealWeight() + "</distanceFromIdealWeight>" +
-                @"</measurement>" +
-                @"</patient>" +
-                "</PatientHistory>"
-            );
-            return document;
-        }
-
-        private static void LoadHistoryFile()
-        {
-            XmlDocument document = new XmlDocument();
-            //获取当前执行程序的文件夹，并替换路径为xml文件
-            document.Load(Assembly.GetExecutingAssembly().Location
-                .Replace("CaloriesCalculator.exe", "PatientHistory.xml"));
-        }
-
-        private void SetMeasurementValues(XmlNode measurement)
-        {
-            measurement.Attributes["date"].Value = DateTime.Now.ToString();
-            measurement["height"].FirstChild.Value = Patient.HeightInInches.ToString();
-            measurement["weight"].FirstChild.Value = Patient.WeightInPounds.ToString();
-            measurement["age"].FirstChild.Value = Patient.Age.ToString();
-            measurement["dailyCaloriesRecommended"].FirstChild.Value = Patient.DailyCaloriesRecommended().ToString();
-            measurement["idealBodyWeight"].FirstChild.Value = Patient.IdealBodyWeight().ToString();
-            measurement["distanceFromIdealWeight"].FirstChild.Value = Patient.DistanceFromIdealWeight().ToString();
+            Process.Start("IExplore.exe",
+                PatientHistoryXmlStorage.PatientHistoryFileLocation);
         }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="CaloriesCalculator.Designer.cs">
       <DependentUpon>CaloriesCalculator.cs</DependentUpon>
     </Compile>
+    <Compile Include="PatientHistoryXMLStorage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CaloriesCalculator.resx">
