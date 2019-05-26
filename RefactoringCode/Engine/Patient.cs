@@ -9,7 +9,6 @@
         public double HeightInInches { get; set; }
         public double Age { get; set; }
         public double WeightInPounds { get; set; }
-        public Gender Gender { get; set; }
         public Patient()
         {
 
