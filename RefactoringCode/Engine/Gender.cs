@@ -1,4 +1,4 @@
-﻿namespace CaloriesCalculator
+﻿namespace Engine
 {
     public enum Gender
     {

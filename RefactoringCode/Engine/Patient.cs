@@ -1,6 +1,4 @@
-﻿using System.Runtime.Remoting.Messaging;
-
-namespace CaloriesCalculator
+﻿namespace Engine
 {
     public class Patient{
 
