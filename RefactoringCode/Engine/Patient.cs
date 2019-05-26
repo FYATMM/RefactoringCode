@@ -13,10 +13,8 @@
         {
 
         }
-
+        public  double DistanceFromIdealWeight() => WeightInPounds - IdealBodyWeight();
         //将条件逻辑移到patient类内，因为这个条件已经是patient的成员了，减少暴露的类，简化使用
-
-        public abstract double DistanceFromIdealWeight();
 
         public abstract double IdealBodyWeight();
 
