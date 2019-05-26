@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
-using System.Windows.Forms;
 using System.Xml;
-using Engine;
 
-namespace CaloriesCalculator
+namespace Engine
 {
     public class PatientHistoryXMLStorage
     {
@@ -17,7 +14,8 @@ namespace CaloriesCalculator
             {
                 return System.Reflection.Assembly.
                     GetExecutingAssembly().Location.Replace(
-                        "CaloriesCalculator.exe", "PatientsHistory.xml");
+                        ////"CaloriesCalculator.exe", "PatientsHistory.xml");
+                        "Engine.dll" , "PatientsHistory.xml");
             }
             private set { }
         }

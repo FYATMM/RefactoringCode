@@ -43,6 +43,7 @@
     <Compile Include="FemalePaient.cs" />
     <Compile Include="MalePatient.cs" />
     <Compile Include="Patient.cs" />
+    <Compile Include="PatientHistoryXMLStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
