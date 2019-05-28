@@ -19,25 +19,24 @@ namespace Engine
             }
             private set { }
         }
-
         public PatientHistoryXMLStorage()
         {
             Document = new XmlDocument();
         }
         //搜索存在的patient节点
+
         public void AddNewPatient()
         {
             XmlNode thisPatient = Document.DocumentElement.FirstChild.CloneNode(false);
             thisPatient.Attributes["ssn"].Value = Patient.SSN;
             thisPatient.Attributes["firstName"].Value = Patient.FirstName;
-            thisPatient.Attributes["lastName"].Value = Patient.LastName;
-
+            thisPatient.Attributes["lastName"].Value = Patient.LastName;         
             XmlNode measurement = Document.DocumentElement.FirstChild["measurement"].CloneNode(true);
             SetMeasurementValues(measurement);
-
             thisPatient.AppendChild(measurement);
             Document.FirstChild.AppendChild(thisPatient);
         }
+    
 
         public XmlNode FindPatientNode()
         {
