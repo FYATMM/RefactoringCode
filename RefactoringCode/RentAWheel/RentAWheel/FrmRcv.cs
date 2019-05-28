@@ -45,12 +45,12 @@ namespace RentAWheel
 
             ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
-            //SqlConnection oCn = new SqlConnection(
+            SqlConnection connection = new SqlConnection(connectionString);
+            //SqlConnection connection = new SqlConnection(
             //    "Data Source=TESLATEAM;" +
             //    "Initial Catalog=RENTAWHEELS;" +
             //     "User ID=RENTAWHEELS_LOGIN;Password=RENTAWHEELS_PASSWORD_123");
-            SqlCommand oCmd = new SqlCommand();
+            SqlCommand command = new SqlCommand();
             //add parameter name
             string strSql = "Update Vehicle " +
                     "Set Available = 3," +
@@ -58,24 +58,24 @@ namespace RentAWheel
                     "Tank = @Tank " +
                     "WHERE LicensePlate = @SelectedLP";
            //Add parameter to command
-            oCmd.Parameters.AddWithValue(
+            command.Parameters.AddWithValue(
                 "@Mileage", txtMileage.Text);
-            oCmd.Parameters.AddWithValue(
+            command.Parameters.AddWithValue(
                 "@Tank", tankLevel);
-            oCmd.Parameters.AddWithValue(
+            command.Parameters.AddWithValue(
                  "@SelectedLP", txtLP.Text);
             try
             {
                 //open connection
-                oCn.Open();
+                connection.Open();
                 //Set connection to command
-                oCmd.Connection = oCn;
+                command.Connection = connection;
                 //set Sql string to command object
-                oCmd.CommandText = strSql;
+                command.CommandText = strSql;
                 //exexute command
-                oCmd.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 //close connection
-                oCn.Close();
+                connection.Close();
             }
             catch
             {

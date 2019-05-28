@@ -1,6 +1,6 @@
 ﻿namespace RentAWheel
 {
-    partial class FrmRt
+    partial class VehicleRent
     {
         /// <summary>
         /// Required designer variable.

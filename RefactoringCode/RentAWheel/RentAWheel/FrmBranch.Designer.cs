@@ -31,7 +31,7 @@
             this.txtId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
+            this.BranchName = new System.Windows.Forms.TextBox();
             this.btnLast = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
             this.btnLeft = new System.Windows.Forms.Button();
@@ -68,12 +68,12 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Branch Name";
             // 
-            // txtName
+            // BranchName
             // 
-            this.txtName.Location = new System.Drawing.Point(12, 68);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(143, 20);
-            this.txtName.TabIndex = 2;
+            this.BranchName.Location = new System.Drawing.Point(12, 68);
+            this.BranchName.Name = "BranchName";
+            this.BranchName.Size = new System.Drawing.Size(143, 20);
+            this.BranchName.TabIndex = 2;
             // 
             // btnLast
             // 
@@ -161,12 +161,12 @@
             this.Controls.Add(this.btnLeft);
             this.Controls.Add(this.btnFirst);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.BranchName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtId);
             this.Name = "FrmBranch";
             this.Text = "Branches";
-            this.Load += new System.EventHandler(this.FrmBranch_Load);
+            this.Load += new System.EventHandler(this.BranchMaintenance_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,7 +177,7 @@
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox BranchName;
         internal System.Windows.Forms.Button btnLast;
         internal System.Windows.Forms.Button btnRight;
         internal System.Windows.Forms.Button btnLeft;

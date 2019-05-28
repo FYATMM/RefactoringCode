@@ -32,31 +32,31 @@ private void btnChangeBranch_Click(object sender, EventArgs e)
     if (MessageBox.Show("Are you sure?", "Confirm",
     MessageBoxButtons.OKCancel) == DialogResult.OK)
     {
-        SqlConnection oCn = new SqlConnection(
+        SqlConnection connection = new SqlConnection(
           "Data Source=TESLATEAM;" +
           "Initial Catalog=RENTAWHEELS;" +
           "User ID=RENTAWHEELS_LOGIN;Password=RENTAWHEELS_PASSWORD_123");
-        SqlCommand oCmd;
+        SqlCommand command;
         string strSql = "Update Vehicle " +
                 "Set BranchId = @BranchId " +
                 "WHERE LicensePlate = @SelectedLP";
-        oCmd = new SqlCommand();
+        command = new SqlCommand();
         try
         {   //open connection
-            oCn.Open();
+            connection.Open();
             //Set connection to command
-            oCmd.Connection = oCn;
+            command.Connection = connection;
             //set Sql string to command object
-            oCmd.CommandText = strSql;
+            command.CommandText = strSql;
             //Add parameter to command
-            oCmd.Parameters.AddWithValue(
+            command.Parameters.AddWithValue(
                "@BranchId", branchIdTable[cboBranch.Text]);
-            oCmd.Parameters.AddWithValue(
+            command.Parameters.AddWithValue(
                 "@SelectedLP", txtLP.Text);
             //exexute command
-            oCmd.ExecuteNonQuery();
+            command.ExecuteNonQuery();
             //close connection
-            oCn.Close();
+            connection.Close();
         }
         catch
         {
@@ -71,24 +71,24 @@ private void btnChangeBranch_Click(object sender, EventArgs e)
         {
             branchIdTable = new Hashtable();
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
-            //SqlConnection oCn = new SqlConnection(
+            SqlConnection connection = new SqlConnection(connectionString);
+            //SqlConnection connection = new SqlConnection(
             //    "Data Source=TESLATEAM;" +
             //    "Initial Catalog=RENTAWHEELS;" +
             //    "User ID=RENTAWHEELS_LOGIN;" +
             //    "Password=RENTAWHEELS_PASSWORD_123");
-            SqlCommand oCmd;
+            SqlCommand command;
             string strSql = "Select * from Branch";
-            oCmd = new SqlCommand();
+            command = new SqlCommand();
             SqlDataReader oReader;
             try
             {//open connection
-                oCn.Open();
+                connection.Open();
                 //Set connection to command
-                oCmd.Connection = oCn;
+                command.Connection = connection;
                 //set Sql string to command object
-                oCmd.CommandText = strSql;
-                oReader = oCmd.ExecuteReader();
+                command.CommandText = strSql;
+                oReader = command.ExecuteReader();
                 while (oReader.Read())
                 {
                     cboBranch.Items.Add(oReader[1]);
@@ -99,7 +99,7 @@ private void btnChangeBranch_Click(object sender, EventArgs e)
                 //close reader
                 oReader.Close();
                 //close connection
-                oCn.Close();
+                connection.Close();
             }
             catch
             {

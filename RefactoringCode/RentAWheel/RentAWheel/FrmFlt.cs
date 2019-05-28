@@ -27,24 +27,24 @@ namespace RentAWheel
         {
             ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(connectionString);
 
-            //SqlConnection oCn = new SqlConnection(
+            //SqlConnection connection = new SqlConnection(
             //   "Data Source=TESLATEAM;" +
             //   "Initial Catalog=RENTAWHEELS;" +
             //   "User ID=RENTAWHEELS_LOGIN;" + 
             //   "Password=RENTAWHEELS_PASSWORD_123");
             SqlCommand oCmdCombo = new SqlCommand();
-            SqlDataAdapter oAdapter = new SqlDataAdapter();
+            SqlDataAdapter adapter = new SqlDataAdapter();
             //LOAD BRANCH COMBO -->
             //Create Sql String             
             string strSqlCombo = "Select * from Branch";
             try
             {
                 //open connection
-                oCn.Open();
+                connection.Open();
                 //Set connection to command
-                oCmdCombo.Connection = oCn;
+                oCmdCombo.Connection = connection;
                 //set Sql string to command object
                 oCmdCombo.CommandText = strSqlCombo;
                 //execute command
@@ -64,7 +64,7 @@ namespace RentAWheel
                 //Create Sql String             
                 strSqlCombo = "Select * from Model";
                 //Set connection to command
-                oCmdCombo.Connection = oCn;
+                oCmdCombo.Connection = connection;
                 //set Sql string to command object
                 oCmdCombo.CommandText = strSqlCombo;
                 //execute command
@@ -83,7 +83,7 @@ namespace RentAWheel
                 //LOAD DATASET -->
                 //create data set
                 DataSet dsModel = new DataSet();
-                SqlCommand oCmd = new SqlCommand();
+                SqlCommand command = new SqlCommand();
                 //Create Sql String with parameter @SelectedLP
                 string strSql = "Select Vehicle.LicensePlate AS LicensePlate, " +
                 "Branch.Name as BranchName, " +
@@ -94,15 +94,15 @@ namespace RentAWheel
                 "Inner Join Model On " +
                 "Vehicle.ModelId = Model.ModelId";
                 //Set connection to command
-                oCmd.Connection = oCn;
+                command.Connection = connection;
                 //set Sql string to command object
-                oCmd.CommandText = strSql;
+                command.CommandText = strSql;
                 //execute command
-                oAdapter.SelectCommand = oCmd;
+                adapter.SelectCommand = command;
                 //fill DataSet
-                oAdapter.Fill(dsModel);
+                adapter.Fill(dsModel);
                 //close connection
-                oCn.Close();
+                connection.Close();
                 //destroy objects        
                 dtVehicles = dsModel.Tables[0];
                 if (dtVehicles.Rows.Count > 0)
@@ -179,12 +179,14 @@ private void btnLast_Click(object sender, EventArgs e)
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+#pragma warning disable CS0168 // 声明了变量“strSql”，但从未使用过
             string strSql;
+#pragma warning restore CS0168 // 声明了变量“strSql”，但从未使用过
             ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(connectionString);
 
-            //SqlConnection oCn = new SqlConnection(
+            //SqlConnection connection = new SqlConnection(
             //   "Data Source=TESLATEAM;" +
             //   "Initial Catalog=RENTAWHEELS;" +
             //   "User ID=RENTAWHEELS_LOGIN;" + 
@@ -208,15 +210,15 @@ private void btnLast_Click(object sender, EventArgs e)
             oCmdInsert.Parameters.AddWithValue( 
                 "@BranchId", branchIdTable[cboBranch.Text]);
             //open connection
-            oCn.Open();
+            connection.Open();
             //Set connection to command
-            oCmdDelete.Connection = oCn;
-            oCmdInsert.Connection = oCn;
+            oCmdDelete.Connection = connection;
+            oCmdInsert.Connection = connection;
             //set Sql string to command object
             oCmdDelete.CommandText = strSqlDelete;
             oCmdInsert.CommandText = strSqlInsert;
             //start transaction
-            SqlTransaction oTrx = oCn.BeginTransaction();
+            SqlTransaction oTrx = connection.BeginTransaction();
             //enlist commands with transaction
             oCmdDelete.Transaction = oTrx;
             oCmdInsert.Transaction = oTrx;
@@ -225,13 +227,13 @@ private void btnLast_Click(object sender, EventArgs e)
             oCmdInsert.ExecuteNonQuery();
             oTrx.Commit();
             //close connection
-            oCn.Close();                                              
+            connection.Close();                                              
             FrmFlt_Load(null, null);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {            
-            SqlConnection oCn = new SqlConnection(
+            SqlConnection connection = new SqlConnection(
                "Data Source=TESLATEAM;" +
                "Initial Catalog=RENTAWHEELS;" +
                "User ID=RENTAWHEELS_LOGIN;" + 
@@ -243,15 +245,15 @@ private void btnLast_Click(object sender, EventArgs e)
             oCmdDelete.Parameters.AddWithValue(
             "@LicensePlate", txtLP.Text);            
             //open connection
-            oCn.Open();
+            connection.Open();
             //Set connection to command
-            oCmdDelete.Connection = oCn;            
+            oCmdDelete.Connection = connection;            
             //set Sql string to command object
             oCmdDelete.CommandText = strSqlDelete;                   
             //execute command: delete 
             oCmdDelete.ExecuteNonQuery();
             //close connection
-            oCn.Close();
+            connection.Close();
             FrmFlt_Load(null, null);
         }
 

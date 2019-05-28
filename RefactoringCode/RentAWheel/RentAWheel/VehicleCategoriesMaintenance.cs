@@ -7,12 +7,12 @@ using System.Windows.Forms;
 
 namespace RentAWheel
 {
-    public partial class FrmCat : Form
+    public partial class VehicleCategoriesMaintenance : Form
     {
         private DataTable dtCategory;
         private int currentRowIndex;
 
-        public FrmCat()
+        public VehicleCategoriesMaintenance()
         {
             InitializeComponent();
         }
@@ -24,7 +24,7 @@ namespace RentAWheel
                 currentRowIndex++;
                 DataRow drRow = dtCategory.Rows[currentRowIndex];
                 txtId.Text = drRow["CategoryId"].ToString();
-                txtName.Text = drRow["Name"].ToString();
+                BranchName.Text = drRow["Name"].ToString();
                 txtDailyPrice.Text = drRow["DailyPrice"].ToString();
                 txtWeeklyPrice.Text = drRow["WeeklyPrice"].ToString();
                 txtMonthlyPrice.Text = drRow["MonthlyPrice"].ToString();
@@ -38,7 +38,7 @@ namespace RentAWheel
                 currentRowIndex--;
                 DataRow drRow = dtCategory.Rows[currentRowIndex];
                 txtId.Text = drRow["CategoryId"].ToString();
-                txtName.Text = drRow["Name"].ToString();
+                BranchName.Text = drRow["Name"].ToString();
                 txtDailyPrice.Text = drRow["DailyPrice"].ToString();
                 txtWeeklyPrice.Text = drRow["WeeklyPrice"].ToString();
                 txtMonthlyPrice.Text = drRow["MonthlyPrice"].ToString();
@@ -52,7 +52,7 @@ namespace RentAWheel
                 currentRowIndex = 0;
                 DataRow drRow = dtCategory.Rows[currentRowIndex];
                 txtId.Text = drRow["CategoryId"].ToString();
-                txtName.Text = drRow["Name"].ToString();
+                BranchName.Text = drRow["Name"].ToString();
                 txtDailyPrice.Text = drRow["DailyPrice"].ToString();
                 txtWeeklyPrice.Text = drRow["WeeklyPrice"].ToString();
                 txtMonthlyPrice.Text = drRow["MonthlyPrice"].ToString();
@@ -66,7 +66,7 @@ namespace RentAWheel
                 currentRowIndex = dtCategory.Rows.Count - 1;
                 DataRow drRow = dtCategory.Rows[currentRowIndex];
                 txtId.Text = drRow["CategoryId"].ToString();
-                txtName.Text = drRow["Name"].ToString();
+                BranchName.Text = drRow["Name"].ToString();
                 txtDailyPrice.Text = drRow["DailyPrice"].ToString();
                 txtWeeklyPrice.Text = drRow["WeeklyPrice"].ToString();
                 txtMonthlyPrice.Text = drRow["MonthlyPrice"].ToString();
@@ -77,7 +77,7 @@ namespace RentAWheel
         private void btnNew_Click(object sender, EventArgs e)
         {
             txtId.Text = "";
-            txtName.Text = "";
+            BranchName.Text = "";
             txtDailyPrice.Text = "";
             txtWeeklyPrice.Text = "";
             txtMonthlyPrice.Text = "";
@@ -86,36 +86,36 @@ namespace RentAWheel
         private void FrmCat_Load(object sender, EventArgs e)
         {
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
-            //SqlConnection oCn = new SqlConnection(
+            SqlConnection connection = new SqlConnection(connectionString);
+            //SqlConnection connection = new SqlConnection(
             //   "Data Source=TESLATEAM;" +
             //   "Initial Catalog=RENTAWHEELS;" +
             //   "User ID=RENTAWHEELS_LOGIN;Password=RENTAWHEELS_PASSWORD_123");
-            SqlCommand oCmd = new SqlCommand();
+            SqlCommand command = new SqlCommand();
             DataSet dsBranch = new DataSet();
-            SqlDataAdapter oAdapter = new SqlDataAdapter();
+            SqlDataAdapter adapter = new SqlDataAdapter();
             //Create Sql String 
             string strSql = "Select * from Category";
             try
             {
-                oCn.Open();
+                connection.Open();
                 //Set connection to command
-                oCmd.Connection = oCn;
+                command.Connection = connection;
                 //set Sql string to command object
-                oCmd.CommandText = strSql;
+                command.CommandText = strSql;
                 //execute command
-                oAdapter.SelectCommand = oCmd;
+                adapter.SelectCommand = command;
                 //fill DataSet
-                oAdapter.Fill(dsBranch);
+                adapter.Fill(dsBranch);
                 //close connection
-                oCn.Close();
+                connection.Close();
                 dtCategory = dsBranch.Tables[0];
                 if (dtCategory.Rows.Count > 0)
                 {
                     currentRowIndex = 0;
                     DataRow drRow = dtCategory.Rows[currentRowIndex];
                     txtId.Text = drRow["CategoryId"].ToString();
-                    txtName.Text = drRow["Name"].ToString();
+                    BranchName.Text = drRow["Name"].ToString();
                     txtDailyPrice.Text = drRow["DailyPrice"].ToString();
                     txtWeeklyPrice.Text = drRow["WeeklyPrice"].ToString();
                     txtMonthlyPrice.Text = drRow["MonthlyPrice"].ToString();
@@ -138,12 +138,12 @@ namespace RentAWheel
         {
             string strSql;
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
-            //SqlConnection oCn = new SqlConnection(
+            SqlConnection connection = new SqlConnection(connectionString);
+            //SqlConnection connection = new SqlConnection(
             //   "Data Source=TESLATEAM;" +
             //   "Initial Catalog=RENTAWHEELS;" +
             //   "User ID=RENTAWHEELS_LOGIN;Password=RENTAWHEELS_PASSWORD_123");
-            SqlCommand oCmd = new SqlCommand();
+            SqlCommand command = new SqlCommand();
             if (txtId.Text.Equals(""))
             {
                 //Create Sql String with parameters
@@ -152,12 +152,12 @@ namespace RentAWheel
                 "Values(@Name,@MonthlyPrice, " +
                 "@DailyPrice, @WeeklyPrice)";
                 //add parameters
-                oCmd.Parameters.AddWithValue("@Name", txtName.Text);
-                oCmd.Parameters.AddWithValue(
+                command.Parameters.AddWithValue("@Name", BranchName.Text);
+                command.Parameters.AddWithValue(
                     "@DailyPrice", Convert.ToDecimal(txtDailyPrice.Text));
-                oCmd.Parameters.AddWithValue(
+                command.Parameters.AddWithValue(
                 "@WeeklyPrice", Convert.ToDecimal(txtWeeklyPrice.Text));
-                oCmd.Parameters.AddWithValue(
+                command.Parameters.AddWithValue(
                 "@MonthlyPrice", Convert.ToDecimal(txtMonthlyPrice.Text));
             }
             else
@@ -169,28 +169,28 @@ namespace RentAWheel
                 "MonthlyPrice = @MonthlyPrice " +
                 "Where CategoryId = @CategoryId";
                 //add parameters
-                oCmd.Parameters.AddWithValue("@Name", txtName.Text);
-                oCmd.Parameters.AddWithValue(
+                command.Parameters.AddWithValue("@Name", BranchName.Text);
+                command.Parameters.AddWithValue(
                     "@DailyPrice", Convert.ToDecimal(txtDailyPrice.Text));
-                oCmd.Parameters.AddWithValue(
+                command.Parameters.AddWithValue(
                     "@WeeklyPrice", Convert.ToDecimal(txtWeeklyPrice.Text));
-                oCmd.Parameters.AddWithValue(
+                command.Parameters.AddWithValue(
                     "@MonthlyPrice", Convert.ToDecimal(txtMonthlyPrice.Text));
-                oCmd.Parameters.AddWithValue("@CategoryId",
+                command.Parameters.AddWithValue("@CategoryId",
                     Convert.ToInt16(txtId.Text));
             }
            try
             {
                 //open connection
-                oCn.Open();
+                connection.Open();
                 //Set connection to command
-                oCmd.Connection = oCn;
+                command.Connection = connection;
                 //set Sql string to command object
-                oCmd.CommandText = strSql;
+                command.CommandText = strSql;
                 //exexute command
-                oCmd.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 //close connection
-                oCn.Close();
+                connection.Close();
             }
            catch
             {
@@ -203,28 +203,28 @@ namespace RentAWheel
         private void btnDelete_Click(object sender, EventArgs e)
         {
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
-            //SqlConnection oCn = new SqlConnection(
+            SqlConnection connection = new SqlConnection(connectionString);
+            //SqlConnection connection = new SqlConnection(
             // "Data Source=TESLATEAM;" +
             // "Initial Catalog=RENTAWHEELS;" +
             // "User ID=RENTAWHEELS_LOGIN;Password=RENTAWHEELS_PASSWORD_123");
-            SqlCommand oCmd = new SqlCommand();
+            SqlCommand command = new SqlCommand();
             //add parameter name
             string strSql = "Delete Category " +
             "Where CategoryId = @Id";
-            oCmd.Parameters.AddWithValue("@Id", Convert.ToInt16(txtId.Text));
+            command.Parameters.AddWithValue("@Id", Convert.ToInt16(txtId.Text));
             try
             {
                 //open connection
-                oCn.Open();
+                connection.Open();
                 //Set connection to command
-                oCmd.Connection = oCn;
+                command.Connection = connection;
                 //set Sql string to command object
-                oCmd.CommandText = strSql;
+                command.CommandText = strSql;
                 //exexute command
-                oCmd.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 //close connection
-                oCn.Close();
+                connection.Close();
             }
             catch
             {

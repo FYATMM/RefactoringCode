@@ -25,7 +25,7 @@ namespace RentAWheel
                 currentRowIndex++;
                 DataRow drRow = dtModel.Rows[currentRowIndex];
                 txtId.Text = drRow["ModelId"].ToString();
-                txtName.Text = drRow["ModelName"].ToString();
+                BranchName.Text = drRow["ModelName"].ToString();
                 cboCategory.Text = drRow["CategoryName"].ToString();
             }
         }
@@ -37,7 +37,7 @@ namespace RentAWheel
                 currentRowIndex--;
                 DataRow drRow = dtModel.Rows[currentRowIndex];
                 txtId.Text = drRow["ModelId"].ToString();
-                txtName.Text = drRow["ModelName"].ToString();
+                BranchName.Text = drRow["ModelName"].ToString();
                 cboCategory.Text = drRow["CategoryName"].ToString();
             }
         }
@@ -49,7 +49,7 @@ namespace RentAWheel
                 currentRowIndex = 0;
                 DataRow drRow = dtModel.Rows[currentRowIndex];
                 txtId.Text = drRow["ModelId"].ToString();
-                txtName.Text = drRow["ModelName"].ToString();
+                BranchName.Text = drRow["ModelName"].ToString();
                 cboCategory.Text = drRow["CategoryName"].ToString();
             }
         }
@@ -61,7 +61,7 @@ namespace RentAWheel
                 currentRowIndex = dtModel.Rows.Count - 1;
                 DataRow drRow = dtModel.Rows[currentRowIndex];
                 txtId.Text = drRow["ModelId"].ToString();
-                txtName.Text = drRow["ModelName"].ToString();
+                BranchName.Text = drRow["ModelName"].ToString();
                 cboCategory.Text = drRow["CategoryName"].ToString();
             }
         }
@@ -69,7 +69,7 @@ namespace RentAWheel
         private void btnNew_Click(object sender, EventArgs e)
         {
             txtId.Text = "";
-            txtName.Text = "";
+            BranchName.Text = "";
             cboCategory.Text = "";
         }
 
@@ -79,21 +79,21 @@ namespace RentAWheel
 
             ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
-            //SqlConnection oCn = new SqlConnection(
+            SqlConnection connection = new SqlConnection(connectionString);
+            //SqlConnection connection = new SqlConnection(
             //   "Data Source=TESLATEAM;" +
             //   "Initial Catalog=RENTAWHEELS;" +
             //   "User ID=RENTAWHEELS_LOGIN;Password=RENTAWHEELS_PASSWORD_123");
-            SqlCommand oCmd = new SqlCommand();
+            SqlCommand command = new SqlCommand();
             if (txtId.Text.Equals(""))
             {
                 //Create Sql String with parameter
                 strSql = "Insert Into Model (Name,CategoryId) " +
                     "Values(@ModelName, @CategoryId)";
                 //add parameters
-                oCmd.Parameters.AddWithValue(
-                    "@ModelName", txtName.Text);
-                oCmd.Parameters.AddWithValue(
+                command.Parameters.AddWithValue(
+                    "@ModelName", BranchName.Text);
+                command.Parameters.AddWithValue(
                     "@CategoryId", this.categoryIdTable[cboCategory.Text]);
             }
             else
@@ -103,24 +103,24 @@ namespace RentAWheel
                 "CategoryId = @CategoryId " +
                 "Where ModelId = @ModelId";
                 //add parameters
-                oCmd.Parameters.AddWithValue(
-                   "@ModelName", txtName.Text);
-                oCmd.Parameters.AddWithValue(
+                command.Parameters.AddWithValue(
+                   "@ModelName", BranchName.Text);
+                command.Parameters.AddWithValue(
                     "@CategoryId", this.categoryIdTable[cboCategory.Text]);
-                oCmd.Parameters.AddWithValue("@ModelId", txtId.Text);
+                command.Parameters.AddWithValue("@ModelId", txtId.Text);
             }
             try
             {
                 //open connection
-                oCn.Open();
+                connection.Open();
                 //Set connection to command
-                oCmd.Connection = oCn;
+                command.Connection = connection;
                 //set Sql string to command object
-                oCmd.CommandText = strSql;
+                command.CommandText = strSql;
                 //exexute command
-                oCmd.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 //close connection
-                oCn.Close();
+                connection.Close();
             }
             catch
             {
@@ -135,23 +135,23 @@ namespace RentAWheel
 
             ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(connectionString);
 
-            //SqlConnection oCn = new SqlConnection(
+            //SqlConnection connection = new SqlConnection(
             //   "Data Source=TESLATEAM;" +
             //   "Initial Catalog=RENTAWHEELS;" +
             //   "User ID=RENTAWHEELS_LOGIN;Password=RENTAWHEELS_PASSWORD_123");
             SqlCommand oCmdCombo = new SqlCommand();
-            SqlDataAdapter oAdapter = new SqlDataAdapter();
+            SqlDataAdapter adapter = new SqlDataAdapter();
             //LOAD COMBO -->
             //Create Sql String             
             string strSqlCombo = "Select * from Category";
             try
             {
                 //open connection
-                oCn.Open();
+                connection.Open();
                 //Set connection to command
-                oCmdCombo.Connection = oCn;
+                oCmdCombo.Connection = connection;
                 //set Sql string to command object
                 oCmdCombo.CommandText = strSqlCombo;
                 //execute command
@@ -170,7 +170,7 @@ namespace RentAWheel
                 //LOAD DATASET -->
                 //create data set
                 DataSet dsModel = new DataSet();
-                SqlCommand oCmd = new SqlCommand();
+                SqlCommand command = new SqlCommand();
                 //Create Sql String with parameter @SelectedLP
                 string strSql = "Select Model.ModelId As ModelId, " +
                         "Model.Name as ModelName, " +
@@ -178,22 +178,22 @@ namespace RentAWheel
                         "from Model Inner Join Category " +
                         "On Model.CategoryId = Category.CategoryId";
                 //Set connection to command
-                oCmd.Connection = oCn;
+                command.Connection = connection;
                 //set Sql string to command object
-                oCmd.CommandText = strSql;
+                command.CommandText = strSql;
                 //execute command
-                oAdapter.SelectCommand = oCmd;
+                adapter.SelectCommand = command;
                 //fill DataSet
-                oAdapter.Fill(dsModel);
+                adapter.Fill(dsModel);
                 //close connection
-                oCn.Close();
+                connection.Close();
                 //destroy objects        
                 dtModel = dsModel.Tables[0];
                 if (dtModel.Rows.Count > 0)
                 {
                     DataRow drRow = dtModel.Rows[0];
                     txtId.Text = drRow["ModelId"].ToString();
-                    txtName.Text = drRow["ModelName"].ToString();
+                    BranchName.Text = drRow["ModelName"].ToString();
                     cboCategory.Text = drRow["CategoryName"].ToString();
                     currentRowIndex = 0;
                 }
@@ -210,29 +210,29 @@ namespace RentAWheel
         {
             ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(connectionString);
 
-            //SqlConnection oCn = new SqlConnection(
+            //SqlConnection connection = new SqlConnection(
             //  "Data Source=TESLATEAM;" +
             //  "Initial Catalog=RENTAWHEELS;" +
             //  "User ID=RENTAWHEELS_LOGIN;Password=RENTAWHEELS_PASSWORD_123");
-            SqlCommand oCmd = new SqlCommand();
+            SqlCommand command = new SqlCommand();
             //add parameter name
             string strSql = "Delete Model " +
             "Where ModelId = @Id";
-            oCmd.Parameters.AddWithValue("@Id", Convert.ToInt16(txtId.Text));
+            command.Parameters.AddWithValue("@Id", Convert.ToInt16(txtId.Text));
             try
             {
                 //open connection
-                oCn.Open();
+                connection.Open();
                 //Set connection to command
-                oCmd.Connection = oCn;
+                command.Connection = connection;
                 //set Sql string to command object
-                oCmd.CommandText = strSql;
+                command.CommandText = strSql;
                 //exexute command
-                oCmd.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 //close connection
-                oCn.Close();
+                connection.Close();
             }
             catch
             {

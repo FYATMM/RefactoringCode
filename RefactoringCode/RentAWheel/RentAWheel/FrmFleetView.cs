@@ -10,10 +10,10 @@ namespace RentAWheel
     public partial class FrmFleetView : Form
     {
         FrmBranch frmBranch = new FrmBranch();
-        FrmCat frmCategory = new FrmCat();
+        VehicleCategoriesMaintenance frmCategory = new VehicleCategoriesMaintenance();
         FrmModel frmModel = new FrmModel();
         FrmFlt frmFleet = new FrmFlt();
-        FrmRt frmRent = new FrmRt();
+        VehicleRent frmRent = new VehicleRent();
         FrmRcv frmReceive = new FrmRcv();
         FrmChangeBranch frmChangeBranch = new FrmChangeBranch();
 
@@ -36,8 +36,8 @@ namespace RentAWheel
         {
             ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
-            //SqlConnection oCn = new SqlConnection(
+            SqlConnection connection = new SqlConnection(connectionString);
+            //SqlConnection connection = new SqlConnection(
             //   "Data Source=TESLATEAM;" +
             //   "Initial Catalog=RENTAWHEELS;" +
             //   "User ID=RENTAWHEELS_LOGIN;" + 
@@ -50,9 +50,9 @@ namespace RentAWheel
                 "Select * from Branch";
             try
             {
-                oCn.Open();
+                connection.Open();
                 //Set connection to command
-                oCmdCombo.Connection = oCn;
+                oCmdCombo.Connection = connection;
                 //set Sql string to command object
                 oCmdCombo.CommandText = strSqlCombos;
                 //execute command
@@ -140,15 +140,15 @@ namespace RentAWheel
             //Declare variables
             ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(connectionString);
 
-            //SqlConnection oCn = new SqlConnection(
+            //SqlConnection connection = new SqlConnection(
             // "Data Source=TESLATEAM;" +
             // "Initial Catalog=RENTAWHEELS;" +
             // "User ID=RENTAWHEELS_LOGIN;" + 
             // "Password=RENTAWHEELS_PASSWORD_123");
-            SqlCommand oCmd = new SqlCommand();
-            SqlDataAdapter oAdapter = new SqlDataAdapter();
+            SqlCommand command = new SqlCommand();
+            SqlDataAdapter adapter = new SqlDataAdapter();
             SqlDataReader oRd;
             string strSql;
             //clear grid
@@ -201,19 +201,19 @@ namespace RentAWheel
                             available = 3;
                             break;
                     }
-                    oCmd.Parameters.AddWithValue(
+                    command.Parameters.AddWithValue(
                     "@Available", available);
                 }
                 if (cboBranch.Text != "All")
                 {
                     strSql += "Vehicle.BranchId = @BranchId And ";
-                    oCmd.Parameters.AddWithValue(
+                    command.Parameters.AddWithValue(
                         "@BranchId", this.branchIdTable[cboBranch.Text]);
                 }
                 if (cboCategory.Text != "All")
                 {
                     strSql += "Model.CategoryId = @CategoryId And ";
-                    oCmd.Parameters.AddWithValue("@CategoryId",
+                    command.Parameters.AddWithValue("@CategoryId",
                         this.categoryIdTable[cboCategory.Text]);
                 }
                 if (cboOperational.Text != "All")
@@ -229,19 +229,19 @@ namespace RentAWheel
                             operational = 1;
                             break;
                     }
-                    oCmd.Parameters.AddWithValue(
+                    command.Parameters.AddWithValue(
                     "@Operational", operational);
                 }
                 strSql = strSql.Substring(0, strSql.Length - 5);
             }
             //open connection
-            oCn.Open();
+            connection.Open();
             //Set connection to command
-            oCmd.Connection = oCn;
+            command.Connection = connection;
             //set Sql string to command object
-            oCmd.CommandText = strSql;
+            command.CommandText = strSql;
             //execute command
-            oRd = oCmd.ExecuteReader();
+            oRd = command.ExecuteReader();
             //Fill Combo Categories
             while (oRd.Read())
             {
@@ -267,7 +267,7 @@ namespace RentAWheel
             }
             //close reader
             oRd.Close();
-            oCn.Close();
+            connection.Close();
 
         }
 
@@ -349,32 +349,32 @@ namespace RentAWheel
                 }
                 ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
                 string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-                SqlConnection oCn = new SqlConnection(connectionString);
+                SqlConnection connection = new SqlConnection(connectionString);
 
-                //SqlConnection oCn = new SqlConnection(
+                //SqlConnection connection = new SqlConnection(
                 //  "Data Source=TESLATEAM;" +
                 //  "Initial Catalog=RENTAWHEELS;" +
                 //  "User ID=RENTAWHEELS_LOGIN;" + 
                 //  "Password=RENTAWHEELS_PASSWORD_123");
-                SqlCommand oCmd;
+                SqlCommand command;
                 string strSql = "Update Vehicle " +
                         "Set Available = 2 " +
                         "WHERE LicensePlate = @SelectedLP";
-                oCmd = new SqlCommand();
+                command = new SqlCommand();
                 try
                 {//open connection
-                    oCn.Open();
+                    connection.Open();
                     //Set connection to command
-                    oCmd.Connection = oCn;
+                    command.Connection = connection;
                     //set Sql string to command object
-                    oCmd.CommandText = strSql;
+                    command.CommandText = strSql;
                     //Add parameter to command          
-                    oCmd.Parameters.AddWithValue(
+                    command.Parameters.AddWithValue(
                         "@SelectedLP", selectedLP);
                     //exexute command
-                    oCmd.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                     //close connection
-                    oCn.Close();
+                    connection.Close();
                 }
                 catch
                 {
@@ -424,14 +424,14 @@ namespace RentAWheel
                 }
                 ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
                 string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-                SqlConnection oCn = new SqlConnection(connectionString);
+                SqlConnection connection = new SqlConnection(connectionString);
 
-                //SqlConnection oCn = new SqlConnection(
+                //SqlConnection connection = new SqlConnection(
                 //  "Data Source=TESLATEAM;" +
                 //  "Initial Catalog=RENTAWHEELS;" +
                 //  "User ID=RENTAWHEELS_LOGIN;" +
                 //  "Password=RENTAWHEELS_PASSWORD_123");
-                SqlCommand oCmd;
+                SqlCommand command;
                 string strSql = "Update Vehicle " +
                         "Set Available = 0, " +
                         "Mileage = 0," +
@@ -441,21 +441,21 @@ namespace RentAWheel
                         "CustomerDocNumber = ''," +
                         "CustomerDocType = '' " +
                         "WHERE LicensePlate = @SelectedLP";
-                oCmd = new SqlCommand();
+                command = new SqlCommand();
                 try
                 {//open connection
-                    oCn.Open();
+                    connection.Open();
                     //Set connection to command
-                    oCmd.Connection = oCn;
+                    command.Connection = connection;
                     //set Sql string to command object
-                    oCmd.CommandText = strSql;
+                    command.CommandText = strSql;
                     //Add parameter to command          
-                    oCmd.Parameters.AddWithValue(
+                    command.Parameters.AddWithValue(
                         "@SelectedLP", selectedLP);
                     //exexute command
-                    oCmd.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                     //close connection
-                    oCn.Close();
+                    connection.Close();
                 }
                 catch
                 {
@@ -485,30 +485,30 @@ namespace RentAWheel
                     //Warn user if no selection made in table and exit
                     MessageBox.Show("Please select vehicle first!");
                 }
-                SqlConnection oCn = new SqlConnection(
+                SqlConnection connection = new SqlConnection(
                   "Data Source=TESLATEAM;" +
                   "Initial Catalog=RENTAWHEELS;" +
                   "User ID=RENTAWHEELS_LOGIN;" +
                   "Password=RENTAWHEELS_PASSWORD_123");
-                SqlCommand oCmd;
+                SqlCommand command;
                 string strSql = "Update Vehicle " +
                         "Set Operational = 1 " +
                         "WHERE LicensePlate = @SelectedLP";
-                oCmd = new SqlCommand();
+                command = new SqlCommand();
                 try
                 {//open connection
-                    oCn.Open();
+                    connection.Open();
                     //Set connection to command
-                    oCmd.Connection = oCn;
+                    command.Connection = connection;
                     //set Sql string to command object
-                    oCmd.CommandText = strSql;
+                    command.CommandText = strSql;
                     //Add parameter to command          
-                    oCmd.Parameters.AddWithValue(
+                    command.Parameters.AddWithValue(
                         "@SelectedLP", selectedLP);
                     //exexute command
-                    oCmd.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                     //close connection
-                    oCn.Close();
+                    connection.Close();
                 }
                 catch
                 {
@@ -537,30 +537,30 @@ namespace RentAWheel
                     //Warn user if no selection made in table and exit
                     MessageBox.Show("Please select vehicle first!");
                 }
-                SqlConnection oCn = new SqlConnection(
+                SqlConnection connection = new SqlConnection(
                   "Data Source=TESLATEAM;" +
                   "Initial Catalog=RENTAWHEELS;" +
                   "User ID=RENTAWHEELS_LOGIN;" +
                   "Password=RENTAWHEELS_PASSWORD_123");
-                SqlCommand oCmd;
+                SqlCommand command;
                 string strSql = "Update Vehicle " +
                         "Set Operational = 0 " +
                         "WHERE LicensePlate = @SelectedLP";
-                oCmd = new SqlCommand();
+                command = new SqlCommand();
                 try
                 {//open connection
-                    oCn.Open();
+                    connection.Open();
                     //Set connection to command
-                    oCmd.Connection = oCn;
+                    command.Connection = connection;
                     //set Sql string to command object
-                    oCmd.CommandText = strSql;
+                    command.CommandText = strSql;
                     //Add parameter to command          
-                    oCmd.Parameters.AddWithValue(
+                    command.Parameters.AddWithValue(
                         "@SelectedLP", selectedLP);
                     //exexute command
-                    oCmd.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                     //close connection
-                    oCn.Close();
+                    connection.Close();
                 }
                 catch
                 {
@@ -570,19 +570,20 @@ namespace RentAWheel
             }
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             //Test SqlConnection
             ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
             string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-            SqlConnection oCn = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(connectionString);
 
-            //SqlConnection oCn = new SqlConnection(
+            //SqlConnection connection = new SqlConnection(
             //     "Data Source=TESLATEAM;" +
             //     "Initial Catalog=RENTAWHEELS;" +
             //     "User ID=RENTAWHEELS_LOGIN;" +
             //     "Password=RENTAWHEELS_PASSWORD_123");
-            oCn.Open();
+            connection.Open();
         }
     }
 }

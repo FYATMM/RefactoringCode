@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace RentAWheel
 {
-    public partial class FrmRt : Form
+    public partial class VehicleRent : Form
     {
-        public FrmRt()
+        public VehicleRent()
         {
             InitializeComponent();
         }
@@ -25,13 +25,13 @@ private void btnRent_Click(object sender, EventArgs e)
     {
                 ////string connectionString = ConfigurationManager.ConnectionStrings["SQLCONNECTIONSTRING"].ConnectionString;
                 string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
-                SqlConnection oCn = new SqlConnection(connectionString);
-          //      SqlConnection oCn = new SqlConnection(
+                SqlConnection connection = new SqlConnection(connectionString);
+          //      SqlConnection connection = new SqlConnection(
           //"Data Source=TESLATEAM;" +
           //"Initial Catalog=RENTAWHEELS;" +
           //"User ID=RENTAWHEELS_LOGIN;" +
           //"Password=RENTAWHEELS_PASSWORD_123");
-        SqlCommand oCmd;
+        SqlCommand command;
         string strSql = "Update Vehicle " +
                     "Set Available = 1," +
                     "CustomerFirstName = @CustomerFirstName," +
@@ -39,29 +39,29 @@ private void btnRent_Click(object sender, EventArgs e)
                     "CustomerDocNumber = @CustomerDocNumber," +
                     "CustomerDocType = @CustomerDocType " +
                     "WHERE LicensePlate = @SelectedLP";
-        oCmd = new SqlCommand();
+        command = new SqlCommand();
         try
         {//open connection
-            oCn.Open();
+            connection.Open();
             //Set connection to command
-            oCmd.Connection = oCn;
+            command.Connection = connection;
             //set Sql string to command object
-            oCmd.CommandText = strSql;
+            command.CommandText = strSql;
             //Add parameter to command
-            oCmd.Parameters.AddWithValue(
+            command.Parameters.AddWithValue(
                 "@CustomerFirstName", txtFirstName.Text);
-            oCmd.Parameters.AddWithValue(
+            command.Parameters.AddWithValue(
                 "@CustomerLastName", txtLastName.Text);
-            oCmd.Parameters.AddWithValue(
+            command.Parameters.AddWithValue(
                 "@CustomerDocNumber", txtDocumentNo.Text);
-            oCmd.Parameters.AddWithValue(
+            command.Parameters.AddWithValue(
                 "@CustomerDocType", txtDocumentType.Text);
-            oCmd.Parameters.AddWithValue(
+            command.Parameters.AddWithValue(
                 "@SelectedLP", txtLP.Text);
             //exexute command
-            oCmd.ExecuteNonQuery();
+            command.ExecuteNonQuery();
             //close connection
-            oCn.Close();
+            connection.Close();
         }
         catch
         {

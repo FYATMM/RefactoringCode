@@ -1,6 +1,6 @@
 ﻿namespace RentAWheel
 {
-    partial class FrmCat
+    partial class VehicleCategoriesMaintenance
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@
             this.btnRight = new System.Windows.Forms.Button();
             this.btnLeft = new System.Windows.Forms.Button();
             this.btnFirst = new System.Windows.Forms.Button();
-            this.txtName = new System.Windows.Forms.TextBox();
+            this.BranchName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -168,12 +168,12 @@
             this.btnFirst.Text = "<<";
             this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
-            // txtName
+            // BranchName
             // 
-            this.txtName.Location = new System.Drawing.Point(11, 77);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(140, 20);
-            this.txtName.TabIndex = 33;
+            this.BranchName.Location = new System.Drawing.Point(11, 77);
+            this.BranchName.Name = "BranchName";
+            this.BranchName.Size = new System.Drawing.Size(140, 20);
+            this.BranchName.TabIndex = 33;
             // 
             // label2
             // 
@@ -220,7 +220,7 @@
             this.Controls.Add(this.btnRight);
             this.Controls.Add(this.btnLeft);
             this.Controls.Add(this.btnFirst);
-            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.BranchName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.label1);
@@ -248,7 +248,7 @@
         internal System.Windows.Forms.Button btnRight;
         internal System.Windows.Forms.Button btnLeft;
         internal System.Windows.Forms.Button btnFirst;
-        internal System.Windows.Forms.TextBox txtName;
+        internal System.Windows.Forms.TextBox BranchName;
         internal System.Windows.Forms.Label label2;
         internal System.Windows.Forms.TextBox txtId;
         internal System.Windows.Forms.Label label1;

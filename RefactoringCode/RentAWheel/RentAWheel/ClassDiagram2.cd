@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RentAWheel.FrmBranch">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAgAECAEABAgAAiEAAAGAAEIApgAAABAAIIAAQQ=</HashCode>
+      <FileName>FrmBranch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RentAWheel.FrmCat">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQBAAgAECAEABAgAAiEAAAGAAAIAhgAICBAAIIQAQQ=</HashCode>
+      <FileName>FrmCat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RentAWheel.FrmChangeBranch">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAYAACAAABMAAACAQEQCAAAAAAAAAAAAAQAAAEA=</HashCode>
+      <FileName>FrmChangeBranch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RentAWheel.FrmFleetView">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQICjEZAQGAKoJYAAoSSkABK0AEJQIoIAmoCEwQAySg=</HashCode>
+      <FileName>FrmFleetView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RentAWheel.FrmFlt">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIAAAAwAECAEABAgAAiEBAQGAAAIAhgACgBAAYIAAQQ=</HashCode>
+      <FileName>FrmFlt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RentAWheel.FrmModel">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAgAUCAEABAgAAiEAAAGAAAIAhgAAgBAAIIIAQQ=</HashCode>
+      <FileName>FrmModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RentAWheel.FrmRcv">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAACgAABEAAAKAAEQCAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>FrmRcv.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RentAWheel.FrmRt">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAGAAABEAAAGgAEQCAABAAAAIBAAAAAAAAQA=</HashCode>
+      <FileName>FrmRt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RentAWheel.Program">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RentAWheel.Properties.Resources">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RentAWheel.Properties.Settings">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

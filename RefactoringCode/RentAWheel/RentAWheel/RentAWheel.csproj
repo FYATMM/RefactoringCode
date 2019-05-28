@@ -79,11 +79,11 @@
     <Compile Include="FrmBranch.designer.cs">
       <DependentUpon>FrmBranch.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmCat.cs">
+    <Compile Include="VehicleCategoriesMaintenance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmCat.designer.cs">
-      <DependentUpon>FrmCat.cs</DependentUpon>
+    <Compile Include="VehicleCategoriesMaintenance.designer.cs">
+      <DependentUpon>VehicleCategoriesMaintenance.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmChangeBranch.cs">
       <SubType>Form</SubType>
@@ -115,19 +115,19 @@
     <Compile Include="FrmRcv.designer.cs">
       <DependentUpon>FrmRcv.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmRt.cs">
+    <Compile Include="VehicleRent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmRt.designer.cs">
-      <DependentUpon>FrmRt.cs</DependentUpon>
+    <Compile Include="VehicleRent.designer.cs">
+      <DependentUpon>VehicleRent.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmBranch.resx">
       <DependentUpon>FrmBranch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmCat.resx">
-      <DependentUpon>FrmCat.cs</DependentUpon>
+    <EmbeddedResource Include="VehicleCategoriesMaintenance.resx">
+      <DependentUpon>VehicleCategoriesMaintenance.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmChangeBranch.resx">
@@ -150,8 +150,8 @@
       <DependentUpon>FrmRcv.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmRt.resx">
-      <DependentUpon>FrmRt.cs</DependentUpon>
+    <EmbeddedResource Include="VehicleRent.resx">
+      <DependentUpon>VehicleRent.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -165,6 +165,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
