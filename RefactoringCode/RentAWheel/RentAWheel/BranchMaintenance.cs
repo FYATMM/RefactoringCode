@@ -57,7 +57,7 @@ namespace RentAWheel
         private void BranchMaintenance_Load(object sender, EventArgs e)
         {
             LoadBranches();
-            if (this.branches.Rows.Count > 0)//(dtBranch.Rows.Count > 0)
+            if (branches.Rows.Count > 0)//(dtBranch.Rows.Count > 0)
             {
                 currentRowIndex = 0;
                 DisplayCurrentRow();
