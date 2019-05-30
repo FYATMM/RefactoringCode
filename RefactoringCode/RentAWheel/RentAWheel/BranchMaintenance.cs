@@ -5,22 +5,32 @@ using System.Windows.Forms;
 
 namespace RentAWheel
 {
-    public partial class FrmBranch : Form
+    public partial class BranchMaintenance : Form
     {
-        private DataTable dtBranch;
+        private DataTable branches;
         private int currentRowIndex;
+        private string connectionString = "Data Source=(local);" + "Initial Catalog=RENTAWHEELS;" + "Integrated Security=True";
+        private const int singleTableInDatasetIndex = 0;
 
-        private string connectionString = "Data Source=(local);Initial Catalog=RENTAWHEELS;Integrated Security=True";
+        private const string branchTableIdColumnName = "BranchId";
+        private const string branchTableNameColumnName = "Name";
 
-        public FrmBranch()
+        private const String idParameterName = "@Id";
+        private const String nameParameterName = "@Name";
+        //用常量替换SQL字符串字面值
+        private const string selectAllFromBranchSql = "Select * from Branch";
+        const String insertBranchSql = "Insert Into Branch (Name)  Values(@Name)";
+        const String updateBranchSql = "Update Branch  Set Name = @Name Where BranchId = @Id";
+        private const String deleteBranchSql = "Delete Branch Where BranchId = @Id";
+        public BranchMaintenance()
         {
             InitializeComponent();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            txtId.Text = "";
-            BranchName.Text = "";
+            id.Text = string.Empty;//txtId.Text = "";
+            name.Text = string.Empty; //"";
         }
         //使用适配器填充数据
         private DataSet FillDataset(IDbCommand command, string strSql)
@@ -37,12 +47,17 @@ namespace RentAWheel
             return Branches;
         }
 
-        private void BranchMaintenance_Load(object sender, EventArgs e)
+        private void LoadBranches()
         {
             IDbCommand command = new SqlCommand();////SqlCommand command = new SqlCommand();
-            string strSql = "Select * from Branch";
-            dtBranch = FillDataset(command, strSql).Tables[0];
-            if (dtBranch.Rows.Count > 0)
+            DataSet branches = FillDataset(command,selectAllFromBranchSql);//DataSet branches = FillDataset(command, strSql).Tables[0];////dtBranch = FillDataset(command, strSql).Tables[0];
+            this.branches = branches.Tables[singleTableInDatasetIndex];
+        }
+
+        private void BranchMaintenance_Load(object sender, EventArgs e)
+        {
+            LoadBranches();
+            if (this.branches.Rows.Count > 0)//(dtBranch.Rows.Count > 0)
             {
                 currentRowIndex = 0;
                 DisplayCurrentRow();
@@ -52,14 +67,14 @@ namespace RentAWheel
         //显示一行数据库内容方法提取
         private void DisplayCurrentRow()
         {
-            DataRow drRow = dtBranch.Rows[currentRowIndex];
-            txtId.Text = drRow["BranchId"].ToString();
-            BranchName.Text = drRow["Name"].ToString();
+            DataRow drRow = branches.Rows[currentRowIndex];
+            id.Text = drRow["BranchId"].ToString();
+            name.Text = drRow["Name"].ToString();
         }
 
         private void btnRight_Click(object sender, EventArgs e)
         {
-            if (dtBranch.Rows.Count > currentRowIndex + 1)
+            if (branches.Rows.Count > currentRowIndex + 1)
             {
                 currentRowIndex++;
                 DisplayCurrentRow();
@@ -68,7 +83,7 @@ namespace RentAWheel
 
         private void btnLeft_Click(object sender, EventArgs e)
         {
-            if (currentRowIndex - 1 >= 0 & dtBranch.Rows.Count > 0)
+            if (currentRowIndex - 1 >= 0 & branches.Rows.Count > 0)
             {
                 currentRowIndex--;
                 DisplayCurrentRow();
@@ -77,7 +92,7 @@ namespace RentAWheel
 
         private void btnFirst_Click(object sender, EventArgs e)
         {
-            if (dtBranch.Rows.Count > 0)
+            if (branches.Rows.Count > 0)
             {
                 currentRowIndex = 0;
                 DisplayCurrentRow();
@@ -86,9 +101,9 @@ namespace RentAWheel
 
         private void btnLast_Click(object sender, EventArgs e)
         {
-            if (dtBranch.Rows.Count > 0)
+            if (branches.Rows.Count > 0)
             {
-                currentRowIndex = dtBranch.Rows.Count - 1;
+                currentRowIndex = branches.Rows.Count - 1;
                 DisplayCurrentRow();
             }
         }
@@ -113,45 +128,51 @@ namespace RentAWheel
 
         #region 创建连接，执行命令 方法提取
         //创建连接
-        private IDbConnection PrepareDataObject(IDbCommand command, string strSql)
+        private IDbConnection PrepareDataObject(IDbCommand command, string sql)
         {
             IDbConnection connection = new SqlConnection(connectionString);////SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             command.Connection = connection;
-            command.CommandText = strSql;
+            command.CommandText = sql;
             return connection;
         }
         //执行命令
-        private void ExecuteNonQueray(IDbCommand command, string strSql)
+        private void ExecuteNonQueray(IDbCommand command, string sql            )
         {
-            IDbConnection connection = PrepareDataObject(command, strSql);
+            IDbConnection connection = PrepareDataObject(command, sql);
             command.ExecuteNonQuery();
             connection.Close();
         }
         #endregion
-        private void btnSave_Click(object sender, EventArgs e)
+
+        private void SaveBranch()
         {
-            string strSql;
             IDbCommand command = new SqlCommand();////SqlCommand command = new SqlCommand();
-            if (txtId.Text.Equals(""))
+            if (id.Text.Equals(""))
             {
-                strSql = "Insert Into Branch (Name) " + "Values(@Name)";//Create Sql String with parameter @SelectedLP                
-                AddParameter(command, "@Name", DbType.String, BranchName.Text);//command.Parameters.AddWithValue("@Name", BranchName.Text);
+                ////strSql = insertBranchSql;//Create Sql String with parameter @SelectedLP                
+                AddParameter(command, nameParameterName, DbType.String, name.Text);//command.Parameters.AddWithValue("@Name", BranchName.Text);
+                ExecuteNonQueray(command, insertBranchSql);
             }
             else
             {
-                strSql = "Update Branch  Set Name = @Name " + "Where BranchId = @Id";
-                AddParameter(command, "@Name", DbType.String, BranchName.Text);
-                AddParameter(command, "@Id", DbType.Int16, Convert.ToInt16(txtId.Text));
+                ////strSql = updateBranchSql;
+                AddParameter(command, "@Name", DbType.String, name.Text);
+                AddParameter(command, idParameterName, DbType.Int16, Convert.ToInt16(id.Text));
+                ExecuteNonQueray(command, updateBranchSql);
             }
-            ExecuteNonQueray(command, strSql);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveBranch();
             BranchMaintenance_Load(null, null);
         }
-        private const String deleteBranchSql = "Delete Branch Where BranchId = @Id";//用常量替换SQL字符串字面值
+
         private void DeleteBranch()
         {
             IDbCommand command = new SqlCommand();////SqlCommand command = new SqlCommand();
-            AddParameter(command, "@Id", DbType.Int16, Convert.ToInt16(txtId.Text));
+            AddParameter(command, "@Id", DbType.Int16, Convert.ToInt16(id.Text));
             ExecuteNonQueray(command, deleteBranchSql);
         }
 

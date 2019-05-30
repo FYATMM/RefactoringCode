@@ -9,7 +9,7 @@ namespace RentAWheel
 {
     public partial class FrmFleetView : Form
     {
-        FrmBranch frmBranch = new FrmBranch();
+        BranchMaintenance frmBranch = new BranchMaintenance();
         VehicleCategoriesMaintenance frmCategory = new VehicleCategoriesMaintenance();
         FrmModel frmModel = new FrmModel();
         FrmFlt frmFleet = new FrmFlt();
