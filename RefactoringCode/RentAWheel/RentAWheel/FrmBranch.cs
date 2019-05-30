@@ -153,12 +153,12 @@ namespace RentAWheel
             IDbCommand command = new SqlCommand();////SqlCommand command = new SqlCommand();
             AddParameter(command, "@Id", DbType.Int16, Convert.ToInt16(txtId.Text));
             ExecuteNonQueray(command, deleteBranchSql);
-            BranchMaintenance_Load(null, null);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             DeleteBranch();
+            BranchMaintenance_Load(null, null);
         }
 
         private void btnReload_Click(object sender, EventArgs e)
