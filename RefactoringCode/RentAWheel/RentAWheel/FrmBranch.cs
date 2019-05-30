@@ -41,19 +41,11 @@ namespace RentAWheel
         {
             IDbCommand command = new SqlCommand();////SqlCommand command = new SqlCommand();
             string strSql = "Select * from Branch";
-            try
+            dtBranch = FillDataset(command, strSql).Tables[0];
+            if (dtBranch.Rows.Count > 0)
             {
-                dtBranch = FillDataset(command, strSql).Tables[0];
-                if (dtBranch.Rows.Count > 0)
-                {
-                    currentRowIndex = 0;
-                    DisplayCurrentRow();
-                }
-            }
-            catch
-            {
-                MessageBox.Show("A problem occurred and the application cannot recover! " +
-                "Please contact the technical support.");
+                currentRowIndex = 0;
+                DisplayCurrentRow();
             }
         }
         #region 导航按键，显示不同行数据库内容
@@ -121,7 +113,7 @@ namespace RentAWheel
 
         #region 创建连接，执行命令 方法提取
         //创建连接
-        private IDbConnection  PrepareDataObject(IDbCommand command, string strSql)
+        private IDbConnection PrepareDataObject(IDbCommand command, string strSql)
         {
             IDbConnection connection = new SqlConnection(connectionString);////SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
@@ -132,51 +124,41 @@ namespace RentAWheel
         //执行命令
         private void ExecuteNonQueray(IDbCommand command, string strSql)
         {
-            IDbConnection connection = PrepareDataObject(command , strSql);
+            IDbConnection connection = PrepareDataObject(command, strSql);
             command.ExecuteNonQuery();
             connection.Close();
         }
         #endregion
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string strSql;            
-           IDbCommand command = new SqlCommand();////SqlCommand command = new SqlCommand();
+            string strSql;
+            IDbCommand command = new SqlCommand();////SqlCommand command = new SqlCommand();
             if (txtId.Text.Equals(""))
-            {                
+            {
                 strSql = "Insert Into Branch (Name) " + "Values(@Name)";//Create Sql String with parameter @SelectedLP                
-                AddParameter(command,"@Name",DbType.String, BranchName.Text);//command.Parameters.AddWithValue("@Name", BranchName.Text);
+                AddParameter(command, "@Name", DbType.String, BranchName.Text);//command.Parameters.AddWithValue("@Name", BranchName.Text);
             }
             else
             {
                 strSql = "Update Branch  Set Name = @Name " + "Where BranchId = @Id";
                 AddParameter(command, "@Name", DbType.String, BranchName.Text);
-                AddParameter(command, "@Id", DbType.Int16 , Convert.ToInt16(txtId.Text));
+                AddParameter(command, "@Id", DbType.Int16, Convert.ToInt16(txtId.Text));
             }
-            try
-            {
-                ExecuteNonQueray(command, strSql);
-            }
-            catch
-            {
-                MessageBox.Show("A problem occurred and the application cannot recover! Please contact the technical support.");
-            }
+            ExecuteNonQueray(command, strSql);
+            BranchMaintenance_Load(null, null);
+        }
+        private const String deleteBranchSql = "Delete Branch Where BranchId = @Id";//用常量替换SQL字符串字面值
+        private void DeleteBranch()
+        {
+            IDbCommand command = new SqlCommand();////SqlCommand command = new SqlCommand();
+            AddParameter(command, "@Id", DbType.Int16, Convert.ToInt16(txtId.Text));
+            ExecuteNonQueray(command, deleteBranchSql);
             BranchMaintenance_Load(null, null);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            IDbCommand command = new SqlCommand();////SqlCommand command = new SqlCommand();
-            string strSql = "Delete Branch " +  "Where BranchId = @Id";
-            AddParameter(command, "@Id",DbType.Int16, Convert.ToInt16(txtId.Text));
-            try
-            {
-                ExecuteNonQueray(command,strSql);
-            }
-            catch
-            {
-                MessageBox.Show("A problem occurred and the application cannot recover! " + "Please contact the technical support.");
-            }
-            BranchMaintenance_Load(null, null);
+            DeleteBranch();
         }
 
         private void btnReload_Click(object sender, EventArgs e)
