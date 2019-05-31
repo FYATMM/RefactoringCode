@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Branch.cs" />
     <Compile Include="BranchMaintenance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +183,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\用数据类取代行\用数据类取代行.csproj">
+      <Project>{6a07d81b-208b-493f-94e4-c0ef9513517d}</Project>
+      <Name>用数据类取代行</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

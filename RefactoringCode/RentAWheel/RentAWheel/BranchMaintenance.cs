@@ -68,8 +68,8 @@ namespace RentAWheel
         private void DisplayCurrentRow()
         {
             DataRow drRow = branches.Rows[currentRowIndex];
-            id.Text = drRow["BranchId"].ToString();
-            name.Text = drRow["Name"].ToString();
+            id.Text = drRow[branchTableIdColumnName].ToString();
+            name.Text = drRow[branchTableNameColumnName].ToString();
         }
 
         private void btnRight_Click(object sender, EventArgs e)
