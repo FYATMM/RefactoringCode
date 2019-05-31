@@ -19,33 +19,16 @@ namespace DataBaseCmd2Class
         }
         public bool Blocked { get; set; }
 
-        public string connectionString = "Data Source=(local);" + "Initial Catalog=RENTAWHEELS;" + "Integrated Security=True";
-
-        public void GetAccount(string number)
+        public AccountData AccountData
         {
-            IDbConnection connection = new SqlConnection(connectionString);
-            IDbDataAdapter adapter = new SqlDataAdapter();
+            get { return _accountData; }
+        }
 
-            DataSet accountDataSet = new DataSet();
+        private readonly AccountData _accountData;
 
-            IDbCommand command = new SqlCommand();
-            string sql = "Select * from AccountsDemo where Number = " + number;
-
-            connection.Open();
-            command.Connection = connection;
-            command.CommandText = sql;
-            adapter.SelectCommand = command;
-            adapter.Fill(accountDataSet);
-            connection.Close();
-            DataTable accountTable = accountDataSet.Tables[0];
-            DataRow accountRow = accountTable.Rows[0];
-            ////把数据库数据导入到account对象
-            ////Account account = new Account();
-            Number = accountRow["Number"].ToString();
-            Name = accountRow["Name"].ToString();
-            Type = accountRow["Type"].ToString();
-            Balance = Convert.ToDecimal(accountRow["Balance"]);
-            Blocked = Convert.ToBoolean(accountRow["Blocked"]);
+        public Account()
+        {
+            _accountData = new AccountData(this);
         }
     }
 }
