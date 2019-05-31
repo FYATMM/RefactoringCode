@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentAWheel", "RentAWheel\Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC分离", "MVC分离\MVC分离.csproj", "{DB27E3F8-3FCE-44CE-9943-D5AE3EF71BA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "用数据类取代行", "用数据类取代行\用数据类取代行.csproj", "{6A07D81B-208B-493F-94E4-C0EF9513517D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseCmd2Class", "用数据类取代行\DataBaseCmd2Class.csproj", "{6A07D81B-208B-493F-94E4-C0EF9513517D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
