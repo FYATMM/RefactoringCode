@@ -8,7 +8,7 @@ namespace DataBaseCmd2Class
     {
         public string connectionString = "Data Source=(local);" + "Initial Catalog=RENTAWHEELS;" + "Integrated Security=True";
 
-        public AccountData(Account account)
+        public AccountData()
         {
             ////_account = account;
         }

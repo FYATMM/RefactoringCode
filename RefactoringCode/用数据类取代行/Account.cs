@@ -19,13 +19,6 @@ namespace DataBaseCmd2Class
         }
         public bool Blocked { get; set; }
 
-        public AccountData AccountData
-        {
-            get { return _accountData; }
-        }
-
-        private readonly AccountData _accountData;
-
         public Account(int number , string name , string type, decimal balance , bool blocked)
         {
             ////_accountData = new AccountData(this);
