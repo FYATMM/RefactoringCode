@@ -21,7 +21,7 @@ namespace DataBaseCmd2Class
     public partial class AccountView : Form
     {
         private DataTable accountTable;
-        private string connectionString = "Data Source=(local);" + "Initial Catalog=RENTAWHEELS;" + "Integrated Security=True";
+
 
         public AccountView()
         {
@@ -29,42 +29,44 @@ namespace DataBaseCmd2Class
         }
         public void viewAccountDetails_Click(object sender, System.EventArgs e)
         {
-            Account account = GetAccount(Number.Text);
+            ////Account account = GetAccount(Number.Text);
+            Account account = new Account();
+            account.GetAccount(Number.Text);
             //Fill controls on the form
             Name.Text = account.Name; //Name.Text = accountRow["Name"].ToString();
             Type.Text = account.Type; //Type.Text = accountRow["Type"].ToString();
             Balance.Text = account.Balance.ToString(CultureInfo.InvariantCulture); ////Balance.Text = accountRow["Balance"].ToString();
         }
 
-        private Account GetAccount(string number)
-        {
-            IDbConnection connection = new SqlConnection(connectionString);
-            IDbDataAdapter adapter = new SqlDataAdapter();
+        //private Account GetAccount(string number)
+        //{
+        //    IDbConnection connection = new SqlConnection(connectionString);
+        //    IDbDataAdapter adapter = new SqlDataAdapter();
 
-            DataSet accountDataSet = new DataSet();
+        //    DataSet accountDataSet = new DataSet();
 
-            IDbCommand command = new SqlCommand();
-            string sql = "Select * from AccountsDemo where Number = " + Number.Text;
+        //    IDbCommand command = new SqlCommand();
+        //    string sql = "Select * from AccountsDemo where Number = " + Number.Text;
 
-            connection.Open();
-            command.Connection = connection;
-            command.CommandText = sql;
-            adapter.SelectCommand = command;
-            adapter.Fill(accountDataSet);
-            connection.Close();
+        //    connection.Open();
+        //    command.Connection = connection;
+        //    command.CommandText = sql;
+        //    adapter.SelectCommand = command;
+        //    adapter.Fill(accountDataSet);
+        //    connection.Close();
 
-            accountTable = accountDataSet.Tables[0];
-            DataRow accountRow = accountTable.Rows[0];
-            ////把数据库数据导入到account对象
-            Account account = new Account();
-            account.Number = accountRow["Number"].ToString();
-            account.Name = accountRow["Name"].ToString();
-            account.Type = accountRow["Type"].ToString();
-            account.Balance = Convert.ToDecimal(accountRow["Balance"]);
-            account.Blocked = Convert.ToBoolean(accountRow["Blocked"]);
+        //    accountTable = accountDataSet.Tables[0];
+        //    DataRow accountRow = accountTable.Rows[0];
+        //    ////把数据库数据导入到account对象
+        //    Account account = new Account();
+        //    account.Number = accountRow["Number"].ToString();
+        //    account.Name = accountRow["Name"].ToString();
+        //    account.Type = accountRow["Type"].ToString();
+        //    account.Balance = Convert.ToDecimal(accountRow["Balance"]);
+        //    account.Blocked = Convert.ToBoolean(accountRow["Blocked"]);
 
-            return account;
-        }
+        //    return account;
+        //}
     }
 
 }
