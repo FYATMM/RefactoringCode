@@ -11,8 +11,8 @@ namespace RentAWheel
     {
         ////public DataTable Branches { get; private set; }
         private int currentRowIndex;
-        public BranchData data { get; set; }
-        public IList<Branch> branches { get; set; }
+        private BranchData data = new BranchData();
+        private IList<Branch> branches { get; set; }
 
         public BranchMaintenance()
         {
