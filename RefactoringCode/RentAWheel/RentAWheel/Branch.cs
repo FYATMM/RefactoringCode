@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RentAWheel
 {
-    class Branch
+    public class Branch
     {
         public int Id { get; set; }
         public string Name { get; set; }
