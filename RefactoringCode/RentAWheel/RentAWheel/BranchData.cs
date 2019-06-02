@@ -25,7 +25,7 @@ namespace RentAWheel
         private const String deleteBranchSql = "Delete Branch Where BranchId = @Id";
 
         private const int singleTableInDatasetIndex = 0;
-
+        
 
         public IList<Branch> GetAll()
         {
