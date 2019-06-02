@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Rent-A-Wheel", "2.Rent-A-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentAWheel", "RentAWheel\RentAWheel\RentAWheel.csproj", "{4F994AEF-2C44-4AF2-9608-E0123264B322}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC分离", "MVC分离\MVC分离.csproj", "{DB27E3F8-3FCE-44CE-9943-D5AE3EF71BA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepalceInheritanceWithDelegation", "MVC分离\RepalceInheritanceWithDelegation.csproj", "{DB27E3F8-3FCE-44CE-9943-D5AE3EF71BA8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseCmd2Class", "用数据类取代行\DataBaseCmd2Class.csproj", "{6A07D81B-208B-493F-94E4-C0EF9513517D}"
 EndProject
